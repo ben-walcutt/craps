@@ -31,10 +31,11 @@ type Challenger struct {
 	PlaceTen bool
 	Pass bool
 	DontPass bool
+	DontCome bool
 }
 
-func EncodeGenes(c Challenger) [27]int {
-	var retVal [27]int;
+func EncodeGenes(c Challenger) [28]int {
+	var retVal [28]int;
 
 	retVal[0] = BtoI(c.Come);
 	retVal[1] = BtoI(c.ComeFour);
@@ -63,11 +64,12 @@ func EncodeGenes(c Challenger) [27]int {
 	retVal[24] = BtoI(c.PlaceTen);
 	retVal[25] = BtoI(c.Pass);
 	retVal[26] = BtoI(c.DontPass);
+	retVal[27] = BtoI(c.DontCome);
 
 	return retVal;
 }
 
-func DecodeGenes(genes [27]int) Challenger {
+func DecodeGenes(genes [28]int) Challenger {
 	c := Challenger {
 		Come: (genes[0] != 0),
 		ComeFour: (genes[1] != 0),
@@ -96,6 +98,7 @@ func DecodeGenes(genes [27]int) Challenger {
 		PlaceTen: (genes[24] != 0),
 		Pass: (genes[25] != 0),
 		DontPass: (genes[26] != 0),
+		DontCome: (genes[27] != 0),
 	}
 
 	return c;
@@ -105,7 +108,7 @@ func NewChallenger() Challenger {
 	randSource := rand.NewSource(time.Now().UnixNano());
 	randGen := rand.New(randSource);
 
-	var values [27]int;
+	var values [28]int;
 	values[0] = randGen.Intn(2);
 	values[1] = randGen.Intn(2);
 	values[2] = randGen.Intn(2);
@@ -133,8 +136,46 @@ func NewChallenger() Challenger {
 	values[24] = randGen.Intn(2);
 	values[25] = randGen.Intn(2);
 	values[26] = randGen.Intn(2);
+	values[27] = randGen.Intn(2);
 
 	return DecodeGenes(values);
+}
+
+func MakeChild(m Challenger, d Challenger) Challenger {
+	return Challenger {
+		Come: m.Come,
+		ComeFour: d.ComeFour,
+		ComeOddsFour: m.ComeOddsFour,
+		ComeOddsFourValue: d.ComeOddsFourValue,
+		ComeFive: m.ComeFive,
+		ComeOddsFive: d.ComeOddsFive,
+		ComeOddsFiveValue: m.ComeOddsFiveValue,
+		ComeSix: d.ComeSix,
+		ComeOddsSix: m.ComeOddsSix,
+		ComeOddsSixValue: d.ComeOddsSixValue,
+		ComeEight: m.ComeEight,
+		ComeOddsEight: d.ComeOddsEight,
+		ComeOddsEightValue: m.ComeOddsEightValue,
+		ComeNine: d.ComeNine,
+		ComeOddsNine: m.ComeOddsNine,
+		ComeOddsNineValue: d.ComeOddsNineValue,
+		ComeTen: m.ComeTen,
+		ComeOddsTen: d.ComeOddsTen,
+		ComeOddsTenValue: m.ComeOddsTenValue,
+		PlaceFour: d.PlaceFour,
+		PlaceFive: m.PlaceFive,
+		PlaceSix: d.PlaceSix,
+		PlaceEight: m.PlaceEight,
+		PlaceNine: d.PlaceNine,
+		PlaceTen: m.PlaceTen,
+		Pass: d.Pass,
+		DontPass: m.DontPass,
+		DontCome: d.DontCome,
+	}
+}
+
+func MutateChallenger(c Challenger) Challenger {
+	// TODO
 }
 
 type Board struct {
