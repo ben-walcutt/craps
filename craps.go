@@ -10,92 +10,63 @@ import (
 
 const MAX_BET  = 2;
 const UNIT_AMT = 5;
+const STARTING_AMT = 300;
 
 func main() {
 	numOfChildren := flag.Int("c", 20, "Number of children");
 	numOfRolls := flag.Int("g", 20, "Number of rolls");
+	verbose := flag.Bool("v", false, "Verbose output");
 
 	flag.Parse();
 
-	fmt.Println("number of children: ", *numOfChildren);
-	fmt.Println("number of rolls: ", *numOfRolls);
+	if *verbose {
+		fmt.Println("number of children: ", *numOfChildren);
+		fmt.Println("number of rolls: ", *numOfRolls);
+		fmt.Println("Generating children: ");
+	}
 
 	strategies := make([]lib.Strategy, *numOfChildren);
 	
 	for i:=0; i < *numOfChildren; i++ {
 		time.Sleep(1);
-		code := generateStrategyCode();
+		code := lib.GenerateStrategyCode(MAX_BET);
 		strategies[i] = *lib.BuildStrategy(code);
-		fmt.Println(strategies[i].Encode());
+		if *verbose {
+			fmt.Println(strategies[i].Encode());
+		}
 	}
 
-	
+	s := strategies[0];
+	s.Come = true;
+	g := lib.NewGame(UNIT_AMT);
+
+	if g.ComeFour {
+		fmt.Println("come four");
+	}
+
+	b := lib.Board{};
+	b.PlaceBets(s, *g);
+
+	fmt.Println(b);
 
 }
 
-func generateStrategyCode() [41]int {
+func roll() (d1, d2 int) {
 	seed := rand.NewSource(time.Now().UnixNano());
 	randgen := rand.New(seed);
 
-	i := [41]int{
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-		randgen.Intn(4),
-		randgen.Intn(5),
-		randgen.Intn(6),
-		randgen.Intn(6),
-		randgen.Intn(5),
-		randgen.Intn(4),
+	d1 = randgen.Intn(6) + 1;
+	time.Sleep(1);
+	d2 = randgen.Intn(6) + 1;
 
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-		randgen.Intn(2),
-		randgen.Intn(6),
-		randgen.Intn(2),
-		randgen.Intn(6),
-		randgen.Intn(2),
-		randgen.Intn(6),
-		randgen.Intn(2),
-		randgen.Intn(6),
-		randgen.Intn(2),
-		randgen.Intn(6),
-		randgen.Intn(2),
-		randgen.Intn(6),
-
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-		randgen.Intn(2),
-		randgen.Intn(MAX_BET),
-
-		randgen.Intn(2),
-
-		randgen.Intn(MAX_BET),
-		randgen.Intn(4),
-
-		randgen.Intn(2),
-		randgen.Intn(2),
-		randgen.Intn(2),
-		randgen.Intn(2),
-	}
-
-	return i;
+	return d1, d2;
 }
 
-func roll() int {
-	seed := rand.NewSource(time.Now().UnixNano());
-	randgen := rand.New(seed);
+func determinePayout(s lib.Strategy, g lib.Game) {
 
-	d1 := randgen.Intn(6) + 1;
-	d2 := randgen.Intn(6) + 1;
+}
 
-	return d1 + d2;
+func updateGame(g lib.Game) {
+
 }
 

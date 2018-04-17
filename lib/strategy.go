@@ -1,5 +1,10 @@
 package lib
 
+import (
+	"math/rand"
+	"time"
+)
+
 const NUM_OF_PARAMS = 41;
 
 type Strategy struct {
@@ -152,7 +157,7 @@ func CombineStrategies(s1 Strategy, s2 Strategy) *Strategy {
 }
 
 func (s Strategy) Encode() [NUM_OF_PARAMS]int {
-	retVal := [NUM_OF_PARAMS]int{
+	i := [NUM_OF_PARAMS]int{
 		BtoI(s.Come),
 		s.ComeAmt,
 		s.ComeFourOdds,
@@ -196,7 +201,63 @@ func (s Strategy) Encode() [NUM_OF_PARAMS]int {
 		BtoI(s.HardTen),
 	}
 
-	return retVal;
+	return i;
+}
+
+func GenerateStrategyCode(MAX_BET int) [41]int {
+	seed := rand.NewSource(time.Now().UnixNano());
+	randgen := rand.New(seed);
+
+	i := [41]int{
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+		randgen.Intn(4),
+		randgen.Intn(5),
+		randgen.Intn(6),
+		randgen.Intn(6),
+		randgen.Intn(5),
+		randgen.Intn(4),
+
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+		randgen.Intn(2),
+		randgen.Intn(6),
+		randgen.Intn(2),
+		randgen.Intn(6),
+		randgen.Intn(2),
+		randgen.Intn(6),
+		randgen.Intn(2),
+		randgen.Intn(6),
+		randgen.Intn(2),
+		randgen.Intn(6),
+		randgen.Intn(2),
+		randgen.Intn(6),
+
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+		randgen.Intn(2),
+		randgen.Intn(MAX_BET),
+
+		randgen.Intn(2),
+
+		randgen.Intn(MAX_BET),
+		randgen.Intn(4),
+
+		randgen.Intn(2),
+		randgen.Intn(2),
+		randgen.Intn(2),
+		randgen.Intn(2),
+	}
+
+	return i;
 }
 
 func BtoI(b bool) int {
