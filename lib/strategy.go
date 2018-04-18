@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const NUM_OF_PARAMS = 41;
+const NUM_OF_PARAMS = 42;
 
 type Strategy struct {
 	Come bool
@@ -55,6 +55,8 @@ type Strategy struct {
 	HardEight bool
 	HardFour bool
 	HardTen bool
+
+	Amount int
 }
 
 func BuildStrategy(code [NUM_OF_PARAMS]int) *Strategy {
@@ -199,16 +201,17 @@ func (s Strategy) Encode() [NUM_OF_PARAMS]int {
 		BtoI(s.HardEight),
 		BtoI(s.HardFour),
 		BtoI(s.HardTen),
+		s.Amount,
 	}
 
 	return i;
 }
 
-func GenerateStrategyCode(MAX_BET int) [41]int {
+func GenerateStrategyCode(MAX_BET int) [NUM_OF_PARAMS]int {
 	seed := rand.NewSource(time.Now().UnixNano());
 	randgen := rand.New(seed);
 
-	i := [41]int{
+	i := [NUM_OF_PARAMS]int{
 		randgen.Intn(2),
 		randgen.Intn(MAX_BET),
 		randgen.Intn(4),
@@ -255,6 +258,7 @@ func GenerateStrategyCode(MAX_BET int) [41]int {
 		randgen.Intn(2),
 		randgen.Intn(2),
 		randgen.Intn(2),
+		0,
 	}
 
 	return i;

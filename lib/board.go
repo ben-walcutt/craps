@@ -47,7 +47,7 @@ type Board struct {
 	DontOdds int
 }
 
-func (b *Board) PlaceBets(s Strategy, g Game) {
+func (b *Board) PlaceBets(s *Strategy, g Game) {
 	if g.ComeFour && s.Come {
 		b.ComeFour = g.Unit * s.ComeAmt
 	}

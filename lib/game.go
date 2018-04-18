@@ -21,7 +21,6 @@ type Game struct {
 func NewGame (unit int) *Game {
 	g := Game {
 		Unit: unit,
-		ComeFour: true,
 	}
 
 	return &g;
