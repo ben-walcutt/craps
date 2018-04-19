@@ -18,10 +18,10 @@ type Game struct {
 	Unit int
 }
 
-func NewGame (unit int) *Game {
+func NewGame (unit int) Game {
 	g := Game {
 		Unit: unit,
 	}
 
-	return &g;
+	return g;
 }

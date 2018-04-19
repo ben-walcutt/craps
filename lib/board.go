@@ -49,6 +49,10 @@ type Board struct {
 
 func (b *Board) PlaceBets(s *Strategy, g Game) {
 	if g.ComeFour && s.Come {
-		b.ComeFour = g.Unit * s.ComeAmt
+		b.ComeFour = s.ComeAmt * g.Unit;
+	}
+
+	if g.ComeFive && s.Come {
+		b.ComeFive = s.ComeAmt * g.Unit;
 	}
 }
