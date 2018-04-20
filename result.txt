@@ -1,0 +1,1753 @@
+number of children:  1
+number of rolls:  100
+number of iterations:  1
+
+generating children: 
+[0 0 3 0 4 3 1 3 0 0 0 5 0 2 0 4 1 1 0 1 0 5 1 0 0 0 0 1 1 0 1 1 0 0 1 0 2 0 0 1 0 300]
+valid:  true
+current game:  {false false false false false false 0 false 0 5 5 5}
+wager:  0
+payout:  0
+current balance:  300
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 10 5 6 5}
+wager:  75
+payout:  25
+current balance:  325
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 10 4 1 5}
+wager:  75
+payout:  0
+current balance:  325
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false true false false false false 0 true 10 4 3 5}
+wager:  75
+payout:  -30
+current balance:  295
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 4 5 5}
+wager:  0
+payout:  0
+current balance:  295
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 9 5 3 5}
+wager:  75
+payout:  0
+current balance:  295
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false true false false 8 true 9 6 4 5}
+wager:  186
+payout:  0
+current balance:  295
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false true false true 8 true 9 1 1 5}
+wager:  261
+payout:  0
+current balance:  295
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false true false true 8 true 9 3 4 5}
+wager:  261
+payout:  -150
+current balance:  145
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 4 6 5}
+wager:  0
+payout:  0
+current balance:  145
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 10 2 2 5}
+wager:  75
+payout:  35
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {true false false false false false 0 true 10 3 2 5}
+wager:  150
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {true true false false false false 0 true 10 2 3 5}
+wager:  150
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {true true false false false false 0 true 10 1 2 5}
+wager:  150
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {true true false false false false 0 true 10 2 6 5}
+wager:  150
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false true false false 8 true 10 3 3 5}
+wager:  211
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true true true false false 8 true 10 1 2 5}
+wager:  211
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true true true false false 8 true 10 2 1 5}
+wager:  211
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true true true false false 8 true 10 1 1 5}
+wager:  211
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true true true false false 8 true 10 6 4 5}
+wager:  211
+payout:  0
+current balance:  180
+win 10
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 4 3 5}
+wager:  0
+payout:  0
+current balance:  180
+valid:  true
+current game:  {false false false false false false 0 false 0 4 5 5}
+wager:  0
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 9 1 1 5}
+wager:  75
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 9 3 2 5}
+wager:  75
+payout:  0
+current balance:  180
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false true false false false false 0 true 9 3 4 5}
+wager:  75
+payout:  -30
+current balance:  150
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 3 4 5}
+wager:  0
+payout:  0
+current balance:  150
+valid:  true
+current game:  {false false false false false false 0 false 0 4 1 5}
+wager:  0
+payout:  0
+current balance:  150
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 5 4 5 5}
+wager:  75
+payout:  35
+current balance:  185
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false true false 0 true 5 3 4 5}
+wager:  111
+payout:  -66
+current balance:  119
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 1 5 5}
+wager:  0
+payout:  0
+current balance:  119
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 6 3 3 5}
+wager:  75
+payout:  0
+current balance:  119
+win 6
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 3 3 5}
+wager:  0
+payout:  0
+current balance:  119
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 6 6 3 5}
+wager:  75
+payout:  35
+current balance:  154
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false true false 0 true 6 6 1 5}
+wager:  111
+payout:  -66
+current balance:  88
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 1 1 5}
+wager:  0
+payout:  0
+current balance:  88
+valid:  true
+current game:  {false false false false false false 0 false 0 5 3 5}
+wager:  0
+payout:  0
+current balance:  88
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 8 3 4 5}
+wager:  75
+payout:  -30
+current balance:  58
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 5 3 5}
+wager:  0
+payout:  0
+current balance:  58
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false false false false false false 0 true 8 1 4 5}
+wager:  75
+payout:  0
+current balance:  58
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false true false false false false 0 true 8 3 6 5}
+wager:  75
+payout:  35
+current balance:  93
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false true false false true false 0 true 8 6 4 5}
+wager:  111
+payout:  0
+current balance:  93
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false true false false true true 0 true 8 5 6 5}
+wager:  136
+payout:  0
+current balance:  93
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false true false false true true 0 true 8 2 4 5}
+wager:  136
+payout:  0
+current balance:  93
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false true true false true true 0 true 8 4 4 5}
+wager:  136
+payout:  0
+current balance:  93
+win 8
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 3 4 5}
+wager:  0
+payout:  0
+current balance:  93
+valid:  true
+current game:  {false false false false false false 0 false 0 1 2 5}
+wager:  0
+payout:  0
+current balance:  93
+valid:  true
+current game:  {false false false false false false 0 false 0 5 2 5}
+wager:  0
+payout:  0
+current balance:  93
+valid:  true
+current game:  {false false false false false false 0 false 0 4 3 5}
+wager:  0
+payout:  0
+current balance:  93
+valid:  true
+current game:  {false false false false false false 0 false 0 4 2 5}
+wager:  0
+payout:  0
+current balance:  93
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 6 3 6 5}
+wager:  75
+payout:  35
+current balance:  128
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false true false 0 true 6 5 1 5}
+wager:  111
+payout:  0
+current balance:  128
+win 6
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 5 1 5}
+wager:  0
+payout:  0
+current balance:  128
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 6 3 3 5}
+wager:  75
+payout:  0
+current balance:  128
+win 6
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 1 3 5}
+wager:  0
+payout:  0
+current balance:  128
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 4 1 1 5}
+wager:  75
+payout:  0
+current balance:  128
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 4 3 6 5}
+wager:  75
+payout:  35
+current balance:  163
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false true false 0 true 4 5 2 5}
+wager:  111
+payout:  -66
+current balance:  97
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 3 5 5}
+wager:  0
+payout:  0
+current balance:  97
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 8 3 4 5}
+wager:  75
+payout:  -30
+current balance:  67
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 2 1 5}
+wager:  0
+payout:  0
+current balance:  67
+valid:  true
+current game:  {false false false false false false 0 false 0 4 2 5}
+wager:  0
+payout:  0
+current balance:  67
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false false false false false false 0 true 6 3 1 5}
+wager:  75
+payout:  0
+current balance:  67
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true false false false false false 0 true 6 2 1 5}
+wager:  100
+payout:  0
+current balance:  67
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true false false false false false 0 true 6 4 6 5}
+wager:  100
+payout:  0
+current balance:  67
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true false false false false true 0 true 6 4 5 5}
+wager:  100
+payout:  35
+current balance:  102
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true false false false true true 0 true 6 3 5 5}
+wager:  136
+payout:  0
+current balance:  102
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true false false true true true 8 true 6 2 4 5}
+wager:  175
+payout:  0
+current balance:  102
+win 6
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 5 5 5}
+wager:  0
+payout:  0
+current balance:  102
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 10 3 5 5}
+wager:  75
+payout:  0
+current balance:  102
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false false false true false false 8 true 10 5 5 5}
+wager:  136
+payout:  0
+current balance:  102
+win 10
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 4 2 5}
+wager:  0
+payout:  0
+current balance:  102
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 6 6 1 5}
+wager:  75
+payout:  -30
+current balance:  72
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 5 1 5}
+wager:  0
+payout:  0
+current balance:  72
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false false false false false false 0 true 6 6 3 5}
+wager:  75
+payout:  35
+current balance:  107
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false false false false true false 0 true 6 4 1 5}
+wager:  111
+payout:  0
+current balance:  107
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false true false false true false 0 true 6 2 1 5}
+wager:  111
+payout:  0
+current balance:  107
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+current game:  {false true false false true false 0 true 6 2 6 5}
+wager:  111
+payout:  0
+current balance:  107
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false true false true true false 8 true 6 5 5 5}
+wager:  136
+payout:  0
+current balance:  107
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false true false true true true 8 true 6 2 4 5}
+wager:  136
+payout:  0
+current balance:  107
+win 6
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 2 5 5}
+wager:  0
+payout:  0
+current balance:  107
+valid:  true
+current game:  {false false false false false false 0 false 0 2 1 5}
+wager:  0
+payout:  0
+current balance:  107
+valid:  true
+current game:  {false false false false false false 0 false 0 5 3 5}
+wager:  0
+payout:  0
+current balance:  107
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 8 4 3 5}
+wager:  75
+payout:  -30
+current balance:  77
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+valid:  true
+current game:  {false false false false false false 0 false 0 4 3 5}
+wager:  0
+payout:  0
+current balance:  77
+valid:  true
+current game:  {false false false false false false 0 false 0 5 4 5}
+wager:  0
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+current game:  {false false false false false false 0 true 9 4 6 5}
+wager:  75
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false false false false false true 0 true 9 5 6 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false false false false false true 0 true 9 4 1 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {false true false false false true 0 true 9 3 1 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false false false true 0 true 9 3 2 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false false false true 0 true 9 6 6 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false false false true 0 true 9 1 4 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false false false true 0 true 9 2 3 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false false false true 0 true 9 2 6 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false true false true 8 true 9 1 1 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false true false true 8 true 9 1 4 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true false true false true 8 true 9 4 2 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true true true false true 8 true 9 5 1 5}
+wager:  100
+payout:  0
+current balance:  77
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true true true false true 8 true 9 3 1 5}
+wager:  100
+payout:  150
+current balance:  227
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  true
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+valid:  false
+current game:  {true true true true false true 8 true 9 1 6 5}
+wager:  250
+payout:  -250
+current balance:  -23
+seven out
+new game:  {false false false false false false 0 false 0 0 0 5}
+[0 0 3 0 4 3 1 3 0 0 0 5 0 2 0 4 1 1 0 1 0 5 1 0 0 0 0 1 1 0 1 1 0 0 1 0 2 0 0 1 0 -23]

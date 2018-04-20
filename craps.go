@@ -17,7 +17,7 @@ const PAYOUT_OFFSET = 1.2;
 
 func main() {
 	numOfChildren := flag.Int("c", 20, "Number of children");
-	numOfRolls := flag.Int("g", 20, "Number of rolls");
+	numOfRolls := flag.Int("r", 20, "Number of rolls");
 	numOfIterations := flag.Int("i", 1000, "Number of iterations");
 	verbose := flag.Bool("v", false, "Verbose output");
 
@@ -32,12 +32,12 @@ func main() {
 		verboseOutput = true;
 	}
 
-	strategies := make([]lib.Strategy, *numOfChildren);
+	strategies := make([]*lib.Strategy, *numOfChildren);
 	
 	for i:=0; i < *numOfChildren; i++ {
 		time.Sleep(1);
 		code := lib.GenerateStrategyCode(MAX_BET);
-		strategies[i] = *lib.BuildStrategy(code);
+		strategies[i] = lib.BuildStrategy(code);
 		strategies[i].Amount = STARTING_AMT;
 		if *verbose {
 			fmt.Println(strategies[i].Encode());
@@ -49,7 +49,7 @@ func main() {
 		for j:=0; j < *numOfChildren; j++ {
 
 			s := strategies[j];
-			runStrategy(&s, *numOfRolls);
+			runStrategy(s, *numOfRolls);
 		}
 	}
 
@@ -62,19 +62,23 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 	game := lib.NewGame(UNIT_AMT);
 
 	for i:=0; i < numOfRolls; i++ {
+		board := lib.Board{};
+		wager := board.PlaceBets(s, game);
+
 		d1, d2 := roll();
 		game.Die1 = d1;
 		game.Die2 = d2;
 
 		if verboseOutput {
 			fmt.Println("current game: ", game);
+			fmt.Println("wager: ", wager);
 		}
-
-		board := lib.Board{};
-		board.PlaceBets(s, game);
 
 		var payout = determinePayout(game, board);
 		s.Amount += payout;
+		if verboseOutput {
+			fmt.Println("current balance: ", s.Amount);
+		}
 
 		game = updateGame(game, *s);
 	}
@@ -265,6 +269,21 @@ func determinePayout(g lib.Game, b lib.Board) int {
 		}
 	}
 
+	switch diceTotal {
+	case 2:
+	case 12:
+		payout += b.Field * g.Unit * 2;
+	case 3:
+	case 4:
+	case 9:
+	case 10:
+	case 11:
+		payout += b.Field * g.Unit;
+	}
+
+	if verboseOutput {
+		fmt.Println("payout: ", payout);
+	}
 	return payout;
 }
 
