@@ -1,6 +1,6 @@
 package lib
 
-import "fmt"
+// import "fmt"
 
 const PAYOUT_OFFSET = 1.2;
 
@@ -191,8 +191,8 @@ func (b *Board) validateWager(amount int, unit int) (valid bool, wager int) {
 
 	wager += b.PlaceFour * unit;
 	wager += b.PlaceFive * unit;
-	wager += int(float64(b.PlaceSix * unit) * PAYOUT_OFFSET);
-	wager += int(float64(b.PlaceEight * unit) * PAYOUT_OFFSET);
+	wager += b.PlaceSix;
+	wager += b.PlaceEight;
 	wager += b.PlaceNine * unit;
 	wager += b.PlaceTen * unit;
 
@@ -200,13 +200,13 @@ func (b *Board) validateWager(amount int, unit int) (valid bool, wager int) {
 	wager += b.ComeFour * unit;
 	wager += b.ComeFourOdds * unit;
 	wager += b.ComeFive * unit;
-	wager += int(float64(b.ComeFiveOdds * unit) * PAYOUT_OFFSET);
+	wager += b.ComeFiveOdds;
 	wager += b.ComeSix * unit;
 	wager += b.ComeSixOdds * unit;
 	wager += b.ComeEight * unit;
 	wager += b.ComeEightOdds * unit;
 	wager += b.ComeNine * unit;
-	wager += int(float64(b.ComeNineOdds * unit) * PAYOUT_OFFSET);
+	wager += b.ComeNineOdds;
 	wager += b.ComeTen * unit;
 	wager += b.ComeTenOdds * unit;
 
@@ -215,9 +215,9 @@ func (b *Board) validateWager(amount int, unit int) (valid bool, wager int) {
 	wager += b.DontComeFive * unit;
 	wager += b.DontComeFiveOdds * unit;
 	wager += b.DontComeSix * unit;
-	wager += int(float64(b.DontComeSixOdds * unit) * PAYOUT_OFFSET);
+	wager += b.DontComeSixOdds;
 	wager += b.DontComeEight * unit;
-	wager += int(float64(b.DontComeEightOdds * unit) * PAYOUT_OFFSET);
+	wager += b.DontComeEightOdds;
 	wager += b.DontComeNine * unit;
 	wager += b.DontComeNineOdds * unit;
 	wager += b.DontComeTen * unit;
@@ -234,8 +234,6 @@ func (b *Board) validateWager(amount int, unit int) (valid bool, wager int) {
 	wager += b.DontOdds * unit;
 
 	wager += b.Field * unit;
-
-	fmt.Println("valid: ", wager <= amount);
 
 	return wager <= amount, wager;
 }

@@ -13,49 +13,51 @@ type Strategy struct {
 	ComeFourOdds int
 	ComeFiveOdds int
 	ComeSixOdds int
+
 	ComeEightOdds int
 	ComeNineOdds int
 	ComeTenOdds int
-
 	DontCome bool
 	DontComeAmt int
+
 	DontComeFour bool
 	DontComeFourOdds int
 	DontComeFive bool
 	DontComeFiveOdds int
 	DontComeSix bool
+
 	DontComeSixOdds int
 	DontComeEight bool
 	DontComeEightOdds int
 	DontComeNine bool
 	DontComeNineOdds int
+
 	DontComeTen bool
 	DontComeTenOdds int
-
 	PlaceFour bool
 	PlaceFourAmt int
 	PlaceFive bool
+
 	PlaceFiveAmt int
 	PlaceSix bool
 	PlaceSixAmt int
 	PlaceEight bool
 	PlaceEightAmt int
+
 	PlaceNine bool
 	PlaceNineAmt int
 	PlaceTen bool
 	PlaceTenAmt int
-
 	Field bool
 
 	Line int
 	LineOdds int
 	// TODO: add line odds for each point number
-
 	HardSix bool
 	HardEight bool
 	HardFour bool
-	HardTen bool
 
+	HardTen bool
 	Amount int
 }
 

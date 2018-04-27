@@ -44,11 +44,16 @@ func main() {
 		}
 	}
 
+	testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,1,1,1,1, 0,0,0,0,0, 0,0,0,0,0, 0};
+	strategies[0] = lib.BuildStrategy(testCase);
+	strategies[0].Amount = STARTING_AMT;
+
 	for i:=0; i < *numOfIterations; i++ {
 
 		for j:=0; j < *numOfChildren; j++ {
 
 			s := strategies[j];
+			fmt.Println(strategies[i].Encode());
 			runStrategy(s, *numOfRolls);
 		}
 	}
@@ -139,21 +144,21 @@ func determinePayout(g lib.Game, b lib.Board) int {
 			}
 		case 5:
 			payout += b.ComeFive * g.Unit;
-			payout += int(float64(b.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET) / 2 * 3;
+			payout += b.ComeFiveOdds / 2 * 3;
 			payout += b.PlaceFive * g.Unit / 5 * 7;
 			payout -= b.DontComeFive * g.Unit;
 			payout -= b.DontComeFiveOdds * g.Unit;
 
 			if g.Point == 5 {
 				payout += b.PassLine * g.Unit;
-				payout += int(float64(b.PassOdds * g.Unit) * PAYOUT_OFFSET) / 2 * 3;
+				payout += b.PassOdds / 2 * 3;
 				payout -= b.DontPass * g.Unit;
 				payout -= b.DontOdds * g.Unit;
 			}
 		case 6:
 			payout += b.ComeSix * g.Unit;
 			payout += b.ComeSixOdds * g.Unit / 5 * 6;
-			payout += int(float64(b.PlaceSix * g.Unit) * PAYOUT_OFFSET) / 6 * 7;
+			payout += b.PlaceSix / 6 * 7;
 			payout -= b.DontComeSix * g.Unit;
 			payout -= b.DontComeSixOdds * g.Unit;
 
@@ -170,16 +175,16 @@ func determinePayout(g lib.Game, b lib.Board) int {
 			payout -= b.ComeFourOdds * g.Unit;
 			payout -= b.PlaceFour * g.Unit;
 			payout -= b.ComeFive * g.Unit;
-			payout -= int(float64(b.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
+			payout -= b.ComeFiveOdds;
 			payout -= b.PlaceFive * g.Unit;
 			payout -= b.ComeSix * g.Unit;
 			payout -= b.ComeSixOdds * g.Unit;
-			payout -= int(float64(b.PlaceSix * g.Unit) * PAYOUT_OFFSET);
+			payout -= b.PlaceSix;
 			payout -= b.ComeEight * g.Unit;
 			payout -= b.ComeEightOdds * g.Unit;
-			payout -= int(float64(b.PlaceEight * g.Unit) * PAYOUT_OFFSET);
+			payout -= b.PlaceEight;
 			payout -= b.ComeNine * g.Unit;
-			payout -= int(float64(b.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
+			payout -= b.ComeNineOdds;
 			payout -= b.PlaceNine * g.Unit;
 			payout -= b.ComeTen * g.Unit;
 			payout -= b.ComeTenOdds * g.Unit;
@@ -190,9 +195,9 @@ func determinePayout(g lib.Game, b lib.Board) int {
 			payout += b.DontComeFive * g.Unit;
 			payout += b.DontComeFiveOdds * g.Unit / 3 * 2;
 			payout += b.DontComeSix * g.Unit;
-			payout += int(float64(b.DontComeSixOdds * g.Unit) * PAYOUT_OFFSET) / 6 * 5;
+			payout += b.DontComeSixOdds / 6 * 5;
 			payout += b.DontComeEight * g.Unit;
-			payout += int(float64(b.DontComeEightOdds * g.Unit) * PAYOUT_OFFSET) / 6 * 5;
+			payout += b.DontComeEightOdds / 6 * 5;
 			payout += b.DontComeNine * g.Unit;
 			payout += b.DontComeNineOdds * g.Unit / 3 * 2;
 			payout += b.DontComeTen * g.Unit;
@@ -205,7 +210,7 @@ func determinePayout(g lib.Game, b lib.Board) int {
 		case 8:
 			payout += b.ComeEight * g.Unit;
 			payout += b.ComeEightOdds * g.Unit / 5 * 6;
-			payout += int(float64(b.PlaceEight * g.Unit) * PAYOUT_OFFSET) / 6 * 7;
+			payout += b.PlaceEight / 6 * 7;
 			payout -= b.DontComeEight * g.Unit;
 			payout -= b.DontComeEightOdds * g.Unit;
 
@@ -217,14 +222,14 @@ func determinePayout(g lib.Game, b lib.Board) int {
 			}
 		case 9:
 			payout += b.ComeNine * g.Unit;
-			payout += int(float64(b.ComeNineOdds * g.Unit) * PAYOUT_OFFSET) / 2 * 3;
+			payout += b.ComeNineOdds / 2 * 3;
 			payout += b.PlaceNine * g.Unit / 5 * 7;
 			payout -= b.DontComeNine * g.Unit;
 			payout -= b.DontComeNineOdds * g.Unit;
 
 			if g.Point == 9 {
 				payout += b.PassLine * g.Unit;
-				payout += int(float64(b.PassOdds * g.Unit) * PAYOUT_OFFSET) / 2 * 3;
+				payout += b.PassOdds / 2 * 3;
 				payout -= b.DontPass * g.Unit;
 				payout -= b.DontOdds * g.Unit;
 			}
@@ -305,7 +310,6 @@ func updateGame(g lib.Game, s lib.Strategy) lib.Game {
 				g = lib.NewGame(UNIT_AMT);
 				if verboseOutput {
 					fmt.Println("win 4");
-					fmt.Println("new game: ", g);
 				}
 			} else {
 				g.ComeFour = true;
@@ -318,7 +322,6 @@ func updateGame(g lib.Game, s lib.Strategy) lib.Game {
 				g = lib.NewGame(UNIT_AMT);
 				if verboseOutput {
 					fmt.Println("win 5");
-					fmt.Println("new game: ", g);
 				}
 			} else {
 				g.ComeFive = true;
@@ -331,7 +334,6 @@ func updateGame(g lib.Game, s lib.Strategy) lib.Game {
 				g = lib.NewGame(UNIT_AMT);
 				if verboseOutput {
 					fmt.Println("win 6");
-					fmt.Println("new game: ", g);
 				}
 			} else {
 				g.ComeSix = true;
@@ -343,14 +345,12 @@ func updateGame(g lib.Game, s lib.Strategy) lib.Game {
 			g = lib.NewGame(UNIT_AMT);
 			if verboseOutput {
 				fmt.Println("seven out");
-				fmt.Println("new game: ", g);
 			}
 		case 8:
 			if g.Point == 8 {
 				g = lib.NewGame(UNIT_AMT);
 				if verboseOutput {
 					fmt.Println("win 8");
-					fmt.Println("new game: ", g);
 				}
 			} else {
 				g.ComeEight = true;
@@ -363,7 +363,6 @@ func updateGame(g lib.Game, s lib.Strategy) lib.Game {
 				g = lib.NewGame(UNIT_AMT);
 				if verboseOutput {
 					fmt.Println("win 9");
-					fmt.Println("new game: ", g);
 				}
 			} else {
 				g.ComeNine = true;
@@ -376,7 +375,6 @@ func updateGame(g lib.Game, s lib.Strategy) lib.Game {
 				g = lib.NewGame(UNIT_AMT);
 				if verboseOutput {
 					fmt.Println("win 10");
-					fmt.Println("new game: ", g);
 				}
 			} else {
 				g.ComeTen = true;
