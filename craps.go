@@ -44,7 +44,7 @@ func main() {
 		}
 	}
 
-	testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,1,1,1,1, 0,0,0,0,0, 0,0,0,0,0, 0};
+	testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,0, 0,0,0,0,0, 0};
 	strategies[0] = lib.BuildStrategy(testCase);
 	strategies[0].Amount = STARTING_AMT;
 
@@ -124,133 +124,133 @@ func determinePayout(g lib.Game, b lib.Board) int {
 	if g.Working {
 		switch diceTotal {
 		case 2:
-			payout -= b.Come * g.Unit;
-			payout += b.DontCome * g.Unit;
+			payout -= b.Come;
+			payout += b.DontCome;
 		case 3:
-			payout -= b.Come * g.Unit;
-			payout += b.DontCome * g.Unit;
+			payout -= b.Come;
+			payout += b.DontCome;
 		case 4:
-			payout += b.ComeFour * g.Unit;
-			payout += b.ComeFourOdds * g.Unit * 2;
-			payout += b.PlaceFour * g.Unit / 5 * 9
-			payout -= b.DontComeFour * g.Unit;
-			payout -= b.DontComeFourOdds * g.Unit;
+			payout += b.ComeFour;
+			payout += b.ComeFourOdds * 2;
+			payout += b.PlaceFour / 5 * 9
+			payout -= b.DontComeFour;
+			payout -= b.DontComeFourOdds;
 
 			if g.Point == 4 {
-				payout += b.PassLine * g.Unit;
-				payout += b.PassOdds * g.Unit * 2;
-				payout -= b.DontPass * g.Unit;
-				payout -= b.DontOdds * g.Unit;
+				payout += b.PassLine;
+				payout += b.PassOdds  * 2;
+				payout -= b.DontPass;
+				payout -= b.DontOdds;
 			}
 		case 5:
-			payout += b.ComeFive * g.Unit;
+			payout += b.ComeFive;
 			payout += b.ComeFiveOdds / 2 * 3;
-			payout += b.PlaceFive * g.Unit / 5 * 7;
-			payout -= b.DontComeFive * g.Unit;
-			payout -= b.DontComeFiveOdds * g.Unit;
+			payout += b.PlaceFive / 5 * 7;
+			payout -= b.DontComeFive;
+			payout -= b.DontComeFiveOdds;
 
 			if g.Point == 5 {
-				payout += b.PassLine * g.Unit;
+				payout += b.PassLine;
 				payout += b.PassOdds / 2 * 3;
-				payout -= b.DontPass * g.Unit;
-				payout -= b.DontOdds * g.Unit;
+				payout -= b.DontPass;
+				payout -= b.DontOdds;
 			}
 		case 6:
-			payout += b.ComeSix * g.Unit;
-			payout += b.ComeSixOdds * g.Unit / 5 * 6;
+			payout += b.ComeSix;
+			payout += b.ComeSixOdds / 5 * 6;
 			payout += b.PlaceSix / 6 * 7;
-			payout -= b.DontComeSix * g.Unit;
-			payout -= b.DontComeSixOdds * g.Unit;
+			payout -= b.DontComeSix;
+			payout -= b.DontComeSixOdds;
 
 			if g.Point == 6 {
-				payout += b.PassLine * g.Unit;
-				payout += b.PassOdds * g.Unit / 5 * 6;
-				payout -= b.DontPass * g.Unit;
-				payout -= b.DontOdds * g.Unit;
+				payout += b.PassLine;
+				payout += b.PassOdds / 5 * 6;
+				payout -= b.DontPass;
+				payout -= b.DontOdds;
 			}
 		case 7:
-			payout += b.Come * g.Unit;
-			payout -= b.DontCome * g.Unit;
-			payout -= b.ComeFour * g.Unit;
-			payout -= b.ComeFourOdds * g.Unit;
-			payout -= b.PlaceFour * g.Unit;
-			payout -= b.ComeFive * g.Unit;
+			payout += b.Come;
+			payout -= b.DontCome;
+			payout -= b.ComeFour;
+			payout -= b.ComeFourOdds;
+			payout -= b.PlaceFour;
+			payout -= b.ComeFive;
 			payout -= b.ComeFiveOdds;
-			payout -= b.PlaceFive * g.Unit;
-			payout -= b.ComeSix * g.Unit;
-			payout -= b.ComeSixOdds * g.Unit;
+			payout -= b.PlaceFive;
+			payout -= b.ComeSix;
+			payout -= b.ComeSixOdds;
 			payout -= b.PlaceSix;
-			payout -= b.ComeEight * g.Unit;
-			payout -= b.ComeEightOdds * g.Unit;
+			payout -= b.ComeEight;
+			payout -= b.ComeEightOdds;
 			payout -= b.PlaceEight;
-			payout -= b.ComeNine * g.Unit;
+			payout -= b.ComeNine;
 			payout -= b.ComeNineOdds;
-			payout -= b.PlaceNine * g.Unit;
-			payout -= b.ComeTen * g.Unit;
-			payout -= b.ComeTenOdds * g.Unit;
-			payout -= b.PlaceTen * g.Unit;
+			payout -= b.PlaceNine;
+			payout -= b.ComeTen;
+			payout -= b.ComeTenOdds;
+			payout -= b.PlaceTen;
 
-			payout += b.DontComeFour * g.Unit;
-			payout += b.DontComeFourOdds * g.Unit / 2;
-			payout += b.DontComeFive * g.Unit;
-			payout += b.DontComeFiveOdds * g.Unit / 3 * 2;
-			payout += b.DontComeSix * g.Unit;
+			payout += b.DontComeFour;
+			payout += b.DontComeFourOdds / 2;
+			payout += b.DontComeFive;
+			payout += b.DontComeFiveOdds / 3 * 2;
+			payout += b.DontComeSix;
 			payout += b.DontComeSixOdds / 6 * 5;
-			payout += b.DontComeEight * g.Unit;
+			payout += b.DontComeEight;
 			payout += b.DontComeEightOdds / 6 * 5;
-			payout += b.DontComeNine * g.Unit;
-			payout += b.DontComeNineOdds * g.Unit / 3 * 2;
-			payout += b.DontComeTen * g.Unit;
-			payout += b.DontComeTenOdds * g.Unit / 2;
+			payout += b.DontComeNine;
+			payout += b.DontComeNineOdds / 3 * 2;
+			payout += b.DontComeTen;
+			payout += b.DontComeTenOdds / 2;
 
 			payout -= b.HardSix;
 			payout -= b.HardEight;
 			payout -= b.HardFour;
 			payout -= b.HardTen;
 		case 8:
-			payout += b.ComeEight * g.Unit;
-			payout += b.ComeEightOdds * g.Unit / 5 * 6;
+			payout += b.ComeEight;
+			payout += b.ComeEightOdds / 5 * 6;
 			payout += b.PlaceEight / 6 * 7;
-			payout -= b.DontComeEight * g.Unit;
-			payout -= b.DontComeEightOdds * g.Unit;
+			payout -= b.DontComeEight;
+			payout -= b.DontComeEightOdds;
 
 			if g.Point == 8 {
-				payout += b.PassLine * g.Unit;
-				payout += b.PassOdds * g.Unit / 5 * 6;
-				payout -= b.DontPass * g.Unit;
-				payout -= b.DontOdds * g.Unit;
+				payout += b.PassLine;
+				payout += b.PassOdds / 5 * 6;
+				payout -= b.DontPass;
+				payout -= b.DontOdds;
 			}
 		case 9:
-			payout += b.ComeNine * g.Unit;
+			payout += b.ComeNine;
 			payout += b.ComeNineOdds / 2 * 3;
-			payout += b.PlaceNine * g.Unit / 5 * 7;
-			payout -= b.DontComeNine * g.Unit;
-			payout -= b.DontComeNineOdds * g.Unit;
+			payout += b.PlaceNine  / 5 * 7;
+			payout -= b.DontComeNine;
+			payout -= b.DontComeNineOdds;
 
 			if g.Point == 9 {
-				payout += b.PassLine * g.Unit;
+				payout += b.PassLine;
 				payout += b.PassOdds / 2 * 3;
-				payout -= b.DontPass * g.Unit;
-				payout -= b.DontOdds * g.Unit;
+				payout -= b.DontPass;
+				payout -= b.DontOdds;
 			}
 		case 10:
-			payout += b.ComeTen * g.Unit;
-			payout += b.ComeTenOdds * g.Unit * 2;
-			payout += b.PlaceTen * g.Unit / 5 * 9;
-			payout -= b.DontComeTen * g.Unit;
-			payout -= b.DontComeTenOdds * g.Unit;
+			payout += b.ComeTen;
+			payout += b.ComeTenOdds  * 2;
+			payout += b.PlaceTen / 5 * 9;
+			payout -= b.DontComeTen;
+			payout -= b.DontComeTenOdds;
 
 			if g.Point == 10 {
-				payout += b.PassLine * g.Unit;
-				payout += b.PassOdds * g.Unit * 2;
-				payout -= b.DontPass * g.Unit;
-				payout -= b.DontOdds * g.Unit;
+				payout += b.PassLine;
+				payout += b.PassOdds  * 2;
+				payout -= b.DontPass;
+				payout -= b.DontOdds;
 			}
 		case 11:
-			payout += b.Come * g.Unit;
-			payout -= b.DontCome * g.Unit;
+			payout += b.Come;
+			payout -= b.DontCome;
 		case 12:
-			payout -= b.Come * g.Unit;
+			payout -= b.Come;
 		}
 	} else {
 		switch diceTotal {
@@ -263,27 +263,27 @@ func determinePayout(g lib.Game, b lib.Board) int {
 			payout += 0;
 		case 2:
 		case 3:
-			payout -= b.PassLine * g.Unit;
-			payout += b.DontPass * g.Unit;
+			payout -= b.PassLine;
+			payout += b.DontPass;
 		case 7:
 		case 11:
-			payout += b.PassLine * g.Unit;
-			payout -= b.DontPass * g.Unit;
+			payout += b.PassLine;
+			payout -= b.DontPass;
 		case 12:
-			payout -= b.PassLine * g.Unit;
+			payout -= b.PassLine;
 		}
 	}
 
 	switch diceTotal {
 	case 2:
 	case 12:
-		payout += b.Field * g.Unit * 2;
+		payout += b.Field  * 2;
 	case 3:
 	case 4:
 	case 9:
 	case 10:
 	case 11:
-		payout += b.Field * g.Unit;
+		payout += b.Field;
 	}
 
 	if verboseOutput {
