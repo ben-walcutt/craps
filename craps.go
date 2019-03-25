@@ -19,14 +19,16 @@ func main() {
 	numOfChildren := flag.Int("c", 20, "Number of children");
 	numOfRolls := flag.Int("r", 20, "Number of rolls");
 	numOfIterations := flag.Int("i", 1000, "Number of iterations");
+	isTest := flag.Bool("t", false, "Run Test Strategy");
 	verbose := flag.Bool("v", false, "Verbose output");
 
 	flag.Parse();
 
 	if *verbose {
-		fmt.Println("number of children: ", *numOfChildren);
-		fmt.Println("number of rolls: ", *numOfRolls);
+		fmt.Println("number of children:   ", *numOfChildren);
+		fmt.Println("number of rolls:      ", *numOfRolls);
 		fmt.Println("number of iterations: ", *numOfIterations);
+		fmt.Println("is test strategy:     ", *isTest);
 		fmt.Println("");
 		fmt.Println("generating children: ");
 		verboseOutput = true;
@@ -44,9 +46,14 @@ func main() {
 		}
 	}
 
-	testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,0, 0,0,0,0,0, 0};
-	strategies[0] = lib.BuildStrategy(testCase);
-	strategies[0].Amount = STARTING_AMT;
+	fmt.Println("");
+
+	if *isTest {
+		fmt.Println("Using test strateg:");
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,0, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+	}
 
 	for i:=0; i < *numOfIterations; i++ {
 
