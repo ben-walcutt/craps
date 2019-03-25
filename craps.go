@@ -50,7 +50,7 @@ func main() {
 
 	if *isTest {
 		fmt.Println("Using test strateg:");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,0, 0,0,0,0,0, 0};
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,1, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 	}
@@ -110,25 +110,25 @@ func roll() (d1, d2 int) {
 func determinePayout(g lib.Game, b lib.Board) int {
 	payout := 0;
 
-	if g.Die1 == 3 && g.Die2 == 3 {
-		payout += b.HardSix * 9;
-	}
-
-	if g.Die1 == 4 && g.Die2 == 4 {
-		payout += b.HardEight * 9;
-	}
-
-	if g.Die1 == 2 && g.Die2 == 2 {
-		payout += b.HardFour * 7;
-	}
-
-	if g.Die1 == 5 && g.Die2 == 5 {
-		payout += b.HardTen * 7;
-	}
-
 	diceTotal := g.Die1 + g.Die2;
 
 	if g.Working {
+		if g.Die1 == 3 && g.Die2 == 3 {
+			payout += b.HardSix * 9;
+		}
+	
+		if g.Die1 == 4 && g.Die2 == 4 {
+			payout += b.HardEight * 9;
+		}
+	
+		if g.Die1 == 2 && g.Die2 == 2 {
+			payout += b.HardFour * 7;
+		}
+	
+		if g.Die1 == 5 && g.Die2 == 5 {
+			payout += b.HardTen * 7;
+		}
+
 		switch diceTotal {
 		case 2:
 			payout -= b.Come;
@@ -262,17 +262,26 @@ func determinePayout(g lib.Game, b lib.Board) int {
 	} else {
 		switch diceTotal {
 		case 4:
+			payout += 0;
 		case 5:
+			payout += 0;
 		case 6:
+			payout += 0;
 		case 8:
+			payout += 0;
 		case 9:
+			payout += 0;
 		case 10:
 			payout += 0;
 		case 2:
+			payout -= b.PassLine;
+			payout += b.DontPass;
 		case 3:
 			payout -= b.PassLine;
 			payout += b.DontPass;
 		case 7:
+			payout += b.PassLine;
+			payout -= b.DontPass;
 		case 11:
 			payout += b.PassLine;
 			payout -= b.DontPass;
@@ -283,12 +292,23 @@ func determinePayout(g lib.Game, b lib.Board) int {
 
 	switch diceTotal {
 	case 2:
+		payout += b.Field  * 2;
 	case 12:
 		payout += b.Field  * 2;
 	case 3:
+		payout += b.Field;
 	case 4:
+		payout += b.Field;
+	case 5:
+		payout -= b.Field;
+	case 6:
+		payout -= b.Field;
+	case 8:
+		payout -= b.Field;
 	case 9:
+		payout += b.Field;
 	case 10:
+		payout += b.Field;
 	case 11:
 		payout += b.Field;
 	}
