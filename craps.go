@@ -16,6 +16,7 @@ const STARTING_AMT = 300;
 const PAYOUT_OFFSET = 1.2;
 
 func main() {
+	namedStrategy := flag.String("n", "", "Name of Strategy (children and iterations will be 1)");
 	numOfChildren := flag.Int("c", 20, "Number of children");
 	numOfRolls := flag.Int("r", 20, "Number of rolls");
 	numOfIterations := flag.Int("i", 1000, "Number of iterations");
@@ -25,6 +26,11 @@ func main() {
 	flag.Parse();
 
 	if *verbose {
+		if *namedStrategy != "" {
+			fmt.Println("name of strategy:     ", *namedStrategy);
+			*numOfChildren = 1;
+			*numOfIterations = 1;
+		}
 		fmt.Println("number of children:   ", *numOfChildren);
 		fmt.Println("number of rolls:      ", *numOfRolls);
 		fmt.Println("number of iterations: ", *numOfIterations);
@@ -37,8 +43,14 @@ func main() {
 	strategies := make([]*lib.Strategy, *numOfChildren);
 
 	if *isTest {
-		fmt.Println("Using test strategy: ");
+		fmt.Println("Using test strategy");
 		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,1, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		fmt.Println("");
+	} else if *namedStrategy == "Field" {
+		fmt.Println("Using Field strategy");
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		fmt.Println("");
@@ -65,18 +77,18 @@ func main() {
 			fmt.Println("Using strategy: ", j);
 
 			s := strategies[j];
-			fmt.Println(strategies[i].Encode());
+			fmt.Println(strategies[j].Encode());
 			runStrategy(s, *numOfRolls);
 		}
 
 		fmt.Println("");
-	}
+		fmt.Println("Results: ");
 
-	fmt.Println("");
-	fmt.Println("Results: ");
+		for i:=0; i < *numOfChildren; i++ {
+			fmt.Println(strategies[i].Encode());
+		}
 
-	for i:=0; i < *numOfChildren; i++ {
-		fmt.Println(strategies[i].Encode());
+		fmt.Println("");
 	}
 }
 
@@ -95,13 +107,14 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 		s.Amount += payout;
 
 		if verboseOutput {
+			fmt.Println("wager: ", wager);
 			fmt.Println("current balance: ", s.Amount);
 			fmt.Println("current game: ", game);
-			fmt.Println("wager: ", wager);
-			fmt.Println("");
 		}
 
 		game = updateGame(game, *s);
+
+		fmt.Println("");
 	}
 }
 
