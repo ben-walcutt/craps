@@ -35,35 +35,45 @@ func main() {
 	}
 
 	strategies := make([]*lib.Strategy, *numOfChildren);
-	
-	for i:=0; i < *numOfChildren; i++ {
-		time.Sleep(1);
-		code := lib.GenerateStrategyCode(MAX_BET);
-		strategies[i] = lib.BuildStrategy(code);
-		strategies[i].Amount = STARTING_AMT;
-		if *verbose {
-			fmt.Println(strategies[i].Encode());
+
+	if *isTest {
+		fmt.Println("Using test strategy: ");
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,1, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		fmt.Println("");
+	} else {
+		for i:=0; i < *numOfChildren; i++ {
+			time.Sleep(1);
+			code := lib.GenerateStrategyCode(MAX_BET);
+			strategies[i] = lib.BuildStrategy(code);
+			strategies[i].Amount = STARTING_AMT;
+			if *verbose {
+				fmt.Println(strategies[i].Encode());
+			}
 		}
 	}
 
 	fmt.Println("");
 
-	if *isTest {
-		fmt.Println("Using test strateg:");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,1, 0,0,0,0,0, 0};
-		strategies[0] = lib.BuildStrategy(testCase);
-		strategies[0].Amount = STARTING_AMT;
-	}
-
 	for i:=0; i < *numOfIterations; i++ {
 
+		fmt.Println("Running iteration: ", i);
+
 		for j:=0; j < *numOfChildren; j++ {
+
+			fmt.Println("Using strategy: ", j);
 
 			s := strategies[j];
 			fmt.Println(strategies[i].Encode());
 			runStrategy(s, *numOfRolls);
 		}
+
+		fmt.Println("");
 	}
+
+	fmt.Println("");
+	fmt.Println("Results: ");
 
 	for i:=0; i < *numOfChildren; i++ {
 		fmt.Println(strategies[i].Encode());
@@ -81,15 +91,14 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 		game.Die1 = d1;
 		game.Die2 = d2;
 
-		if verboseOutput {
-			fmt.Println("current game: ", game);
-			fmt.Println("wager: ", wager);
-		}
-
 		var payout = determinePayout(game, board);
 		s.Amount += payout;
+
 		if verboseOutput {
 			fmt.Println("current balance: ", s.Amount);
+			fmt.Println("current game: ", game);
+			fmt.Println("wager: ", wager);
+			fmt.Println("");
 		}
 
 		game = updateGame(game, *s);
@@ -282,6 +291,7 @@ func determinePayout(g lib.Game, b lib.Board) int {
 		case 7:
 			payout += b.PassLine;
 			payout -= b.DontPass;
+			payout -= b.Field;
 		case 11:
 			payout += b.PassLine;
 			payout -= b.DontPass;

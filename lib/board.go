@@ -164,7 +164,10 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 			b.HardTen = g.Unit;
 		}
 	} else {
-
+		if valid, _ := b.validateWager(s.Amount); valid && s.Field {
+			b.Field = g.Unit;
+		}
+		
 	}
 
 	switch s.Line {
