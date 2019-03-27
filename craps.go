@@ -31,10 +31,14 @@ func main() {
 			*numOfChildren = 1;
 			*numOfIterations = 1;
 		}
+		if *isTest {
+			fmt.Println("is test strategy:     ", *isTest);
+			*numOfChildren = 1;
+			*numOfIterations = 1;
+		}
 		fmt.Println("number of children:   ", *numOfChildren);
 		fmt.Println("number of rolls:      ", *numOfRolls);
 		fmt.Println("number of iterations: ", *numOfIterations);
-		fmt.Println("is test strategy:     ", *isTest);
 		fmt.Println("");
 		fmt.Println("generating children: ");
 		verboseOutput = true;
@@ -47,12 +51,14 @@ func main() {
 		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,1, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Test Strategy";
 		fmt.Println("");
 	} else if *namedStrategy == "Field" {
 		fmt.Println("Using Field strategy");
 		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Field Only";
 		fmt.Println("");
 	} else {
 		for i:=0; i < *numOfChildren; i++ {
@@ -74,7 +80,7 @@ func main() {
 
 		for j:=0; j < *numOfChildren; j++ {
 
-			fmt.Println("Using strategy: ", j);
+			fmt.Println("Using strategy: ", j, " ", strategies[j].Name);
 
 			s := strategies[j];
 			fmt.Println(strategies[j].Encode());
@@ -304,7 +310,6 @@ func determinePayout(g lib.Game, b lib.Board) int {
 		case 7:
 			payout += b.PassLine;
 			payout -= b.DontPass;
-			payout -= b.Field;
 		case 11:
 			payout += b.PassLine;
 			payout -= b.DontPass;
@@ -325,6 +330,8 @@ func determinePayout(g lib.Game, b lib.Board) int {
 	case 5:
 		payout -= b.Field;
 	case 6:
+		payout -= b.Field;
+	case 7:
 		payout -= b.Field;
 	case 8:
 		payout -= b.Field;

@@ -59,6 +59,7 @@ type Strategy struct {
 
 	HardTen bool
 	Amount int
+	Name string
 }
 
 func BuildStrategy(code [NUM_OF_PARAMS]int) *Strategy {
@@ -105,6 +106,8 @@ func BuildStrategy(code [NUM_OF_PARAMS]int) *Strategy {
 		HardFour: ItoB(code[39]),
 		HardTen: ItoB(code[40]),
 	}
+
+	s.Name = "Stanley Hudson";
 
 	return s;
 }
