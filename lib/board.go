@@ -1,7 +1,5 @@
 package lib
 
-// import "fmt"
-
 const PAYOUT_OFFSET = 1.2;
 
 type Board struct {
@@ -56,135 +54,68 @@ type Board struct {
 func (b *Board) PlaceBets(s *Strategy, g Game) int {
 
 	if g.Working {
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.PlaceFour {
-			b.PlaceFour = s.PlaceFourAmt * g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.PlaceFive {
-			b.PlaceFive = s.PlaceFiveAmt * g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.PlaceSix {
-			b.PlaceSix = int(float64(s.PlaceSixAmt * g.Unit) * PAYOUT_OFFSET);
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.PlaceEight {
-			b.PlaceEight = int(float64(s.PlaceEightAmt * g.Unit) * PAYOUT_OFFSET);
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.PlaceNine {
-			b.PlaceNine = s.PlaceNineAmt * g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.PlaceTen {
-			b.PlaceTen = s.PlaceTenAmt * g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && g.ComeFour && s.Come {
-			b.ComeFour = s.ComeAmt * g.Unit;
-			b.ComeFourOdds = s.ComeFourOdds * g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && g.ComeFive && s.Come {
-			b.ComeFive = s.ComeAmt * g.Unit;
-			b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && g.ComeSix && s.Come {
-			b.ComeSix = s.ComeAmt * g.Unit;
-			b.ComeSixOdds = s.ComeSixOdds * g.Unit;
-		}
-		
-		if valid, _ := b.validateWager(s.Amount); valid && g.ComeEight && s.Come {
-			b.ComeEight = s.ComeAmt * g.Unit;
-			b.ComeEightOdds = s.ComeEightOdds * g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && g.ComeNine && s.Come {
-			b.ComeNine = s.ComeAmt * g.Unit;
-			b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && g.ComeTen && s.Come {
-			b.ComeTen = s.ComeAmt * g.Unit;
-			b.ComeTenOdds = s.ComeTenOdds * g.Unit;
-		}
+		b.PlaceFour = s.PlaceFourAmt * g.Unit;
+		b.PlaceFive = s.PlaceFiveAmt * g.Unit;
+		b.PlaceSix = int(float64(s.PlaceSixAmt * g.Unit) * PAYOUT_OFFSET);
+		b.PlaceEight = int(float64(s.PlaceEightAmt * g.Unit) * PAYOUT_OFFSET);
+		b.PlaceNine = s.PlaceNineAmt * g.Unit;
+		b.PlaceTen = s.PlaceTenAmt * g.Unit;
+		b.ComeFour = s.ComeAmt * g.Unit;
+		b.ComeFourOdds = s.ComeFourOdds * g.Unit;
+		b.ComeFive = s.ComeAmt * g.Unit;
+		b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
+		b.ComeSix = s.ComeAmt * g.Unit;
+		b.ComeSixOdds = s.ComeSixOdds * g.Unit;
+		b.ComeEight = s.ComeAmt * g.Unit;
+		b.ComeEightOdds = s.ComeEightOdds * g.Unit;
+		b.ComeNine = s.ComeAmt * g.Unit;
+		b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
+		b.ComeTen = s.ComeAmt * g.Unit;
+		b.ComeTenOdds = s.ComeTenOdds * g.Unit;
 
 		switch g.DontCome {
 		case 4:
-			if valid, _ := b.validateWager(s.Amount); valid && s.DontComeFour {
-				b.DontComeFour = s.DontComeAmt * g.Unit;
-				b.DontComeFourOdds = s.DontComeFourOdds * g.Unit;
-			}
+			b.DontComeFour = s.DontComeAmt * g.Unit;
+			b.DontComeFourOdds = s.DontComeFourOdds * g.Unit;
 		case 5:
-			if valid, _ := b.validateWager(s.Amount); valid && s.DontComeFive {
-				b.DontComeFive = s.DontComeAmt * g.Unit;
-				b.DontComeFiveOdds = s.DontComeFiveOdds * g.Unit;
-			}
+			b.DontComeFive = s.DontComeAmt * g.Unit;
+			b.DontComeFiveOdds = s.DontComeFiveOdds * g.Unit;
 		case 6:
-			if valid, _ := b.validateWager(s.Amount); valid && s.DontComeSix {
-				b.DontComeSix = s.DontComeAmt * g.Unit;
-				b.DontComeSixOdds = int(float64(s.DontComeSixOdds * g.Unit) * PAYOUT_OFFSET);
-			}
+			b.DontComeSix = s.DontComeAmt * g.Unit;
+			b.DontComeSixOdds = int(float64(s.DontComeSixOdds * g.Unit) * PAYOUT_OFFSET);
 		case 8:
-			if valid, _ := b.validateWager(s.Amount); valid && s.DontComeEight {
-				b.DontComeEight = s.DontComeAmt * g.Unit;
-				b.DontComeEightOdds = int(float64(s.DontComeEightOdds * g.Unit) * PAYOUT_OFFSET);
-			}
+			b.DontComeEight = s.DontComeAmt * g.Unit;
+			b.DontComeEightOdds = int(float64(s.DontComeEightOdds * g.Unit) * PAYOUT_OFFSET);
 		case 9:
-			if valid, _ := b.validateWager(s.Amount); valid && s.DontComeNine {
-				b.DontComeNine = s.DontComeAmt * g.Unit;
-				b.DontComeNineOdds = s.DontComeNineOdds * g.Unit;
-			}
+			b.DontComeNine = s.DontComeAmt * g.Unit;
+			b.DontComeNineOdds = s.DontComeNineOdds * g.Unit;
 		case 10:
-			if valid, _ := b.validateWager(s.Amount); valid && s.DontComeTen {
-				b.DontComeTen = s.DontComeAmt * g.Unit;
-				b.DontComeTenOdds = s.DontComeTenOdds * g.Unit;
-			}
+			b.DontComeTen = s.DontComeAmt * g.Unit;
+			b.DontComeTenOdds = s.DontComeTenOdds * g.Unit;
 		}
 
-		if valid, _ := b.validateWager(s.Amount); valid && s.Field {
-			b.Field = g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.HardSix {
-			b.HardSix = g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.HardEight {
-			b.HardEight = g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.HardFour {
-			b.HardFour = g.Unit;
-		}
-
-		if valid, _ := b.validateWager(s.Amount); valid && s.HardTen {
-			b.HardTen = g.Unit;
-		}
-	} else {
-		if valid, _ := b.validateWager(s.Amount); valid && s.Field {
-			b.Field = g.Unit;
-		}
-		
+		b.HardSix = g.Unit;
+		b.HardEight = g.Unit;
+		b.HardFour = g.Unit;
+		b.HardTen = g.Unit;
 	}
-
+	b.Field = g.Unit;
+		
 	switch s.Line {
 	case 1:
-		if valid, _ := b.validateWager(s.Amount); valid {
-			b.PassLine = s.Line * g.Unit;
-			b.PassOdds = s.LineOdds * g.Unit;
-		}
+		b.PassLine = s.Line * g.Unit;
+		b.PassOdds = s.LineOdds * g.Unit;
 	case 2:
-		if valid, _ := b.validateWager(s.Amount); valid {
-			b.DontPass = s.Line * g.Unit;
-			b.DontOdds = s.LineOdds * g.Unit;
-		}
+		b.DontPass = s.Line * g.Unit;
+		b.DontOdds = s.LineOdds * g.Unit;
 	case 3:
 	}
 
-	_, wager := b.validateWager(s.Amount);
+	valid, wager := b.validateWager(s.Amount);
+
+	if !valid {
+		s.Amount = -1;
+	}
 
 	return wager;	
 }

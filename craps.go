@@ -12,7 +12,7 @@ var verboseOutput bool = false;
 
 const MAX_BET  = 2;
 const UNIT_AMT = 5;
-const STARTING_AMT = 300;
+const STARTING_AMT = 4;
 const PAYOUT_OFFSET = 1.2;
 
 func main() {
@@ -108,6 +108,11 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 		board := lib.Board{};
 		wager := board.PlaceBets(s, game);
 
+		if s.Amount <= 0 {
+			fmt.Println("Bankrupt after ", i, " rolls");
+			break;
+		}
+
 		d1, d2 := roll();
 		game.Die1 = d1;
 		game.Die2 = d2;
@@ -124,11 +129,6 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 		game = updateGame(game, *s);
 
 		fmt.Println("");
-
-		if s.Amount <= 0 {
-			fmt.Println("Bankrupt after ", i, " rolls");
-			break;
-		}
 
 		if s.Amount < minBalance {
 			minBalance = s.Amount;
