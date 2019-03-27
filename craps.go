@@ -101,6 +101,9 @@ func main() {
 func runStrategy(s *lib.Strategy, numOfRolls int) {
 	game := lib.NewGame(UNIT_AMT);
 
+	minBalance := s.Amount;
+	maxBalance := s.Amount;
+
 	for i:=0; i < numOfRolls; i++ {
 		board := lib.Board{};
 		wager := board.PlaceBets(s, game);
@@ -121,7 +124,23 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 		game = updateGame(game, *s);
 
 		fmt.Println("");
+
+		if s.Amount <= 0 {
+			fmt.Println("Bankrupt after ", i, " rolls");
+			break;
+		}
+
+		if s.Amount < minBalance {
+			minBalance = s.Amount;
+		}
+
+		if s.Amount > maxBalance {
+			maxBalance = s.Amount;
+		}
 	}
+
+	fmt.Println("Strategy minimum balance: ", minBalance);
+	fmt.Println("Strategy maximum balance: ", maxBalance);
 }
 
 func roll() (d1, d2 int) {
