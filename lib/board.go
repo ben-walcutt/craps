@@ -1,5 +1,7 @@
 package lib
 
+//import "fmt"
+
 const PAYOUT_OFFSET = 1.2;
 
 type Board struct {

@@ -12,8 +12,10 @@ var verboseOutput bool = false;
 
 const MAX_BET  = 2;
 const UNIT_AMT = 5;
-const STARTING_AMT = 4;
 const PAYOUT_OFFSET = 1.2;
+
+const FIELD_TWO_MULTIPLIER = 2;
+const FIELD_TWELVE_MULTIPLIER = 2;
 
 func main() {
 	namedStrategy := flag.String("n", "", "Name of Strategy (children and iterations will be 1)");
@@ -22,6 +24,7 @@ func main() {
 	numOfIterations := flag.Int("i", 1000, "Number of iterations");
 	isTest := flag.Bool("t", false, "Run Test Strategy");
 	verbose := flag.Bool("v", false, "Verbose output");
+	amount := flag.Int("a", 300, "Starting amount");
 
 	flag.Parse();
 
@@ -36,6 +39,7 @@ func main() {
 			*numOfChildren = 1;
 			*numOfIterations = 1;
 		}
+		fmt.Println("starting amount:      ", *amount);
 		fmt.Println("number of children:   ", *numOfChildren);
 		fmt.Println("number of rolls:      ", *numOfRolls);
 		fmt.Println("number of iterations: ", *numOfIterations);
@@ -44,11 +48,13 @@ func main() {
 		verboseOutput = true;
 	}
 
+	var STARTING_AMT = *amount;
+
 	strategies := make([]*lib.Strategy, *numOfChildren);
 
 	if *isTest {
 		fmt.Println("Using test strategy");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,1, 0,0,0,0,0, 0};
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Test Strategy";
@@ -59,6 +65,13 @@ func main() {
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Field Only";
+		fmt.Println("");
+	} else if *namedStrategy == "Iron Cross" {
+		fmt.Println("Using Iron Cross");
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Iron Cross";
 		fmt.Println("");
 	} else {
 		for i:=0; i < *numOfChildren; i++ {
@@ -339,9 +352,9 @@ func determinePayout(g lib.Game, b lib.Board) int {
 
 	switch diceTotal {
 	case 2:
-		payout += b.Field  * 2;
+		payout += b.Field  * FIELD_TWO_MULTIPLIER;
 	case 12:
-		payout += b.Field  * 2;
+		payout += b.Field  * FIELD_TWELVE_MULTIPLIER;
 	case 3:
 		payout += b.Field;
 	case 4:
