@@ -54,7 +54,7 @@ func main() {
 
 	if *isTest {
 		fmt.Println("Using test strategy");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0};
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 1,1,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Test Strategy";
@@ -274,6 +274,20 @@ func determinePayout(g lib.Game, b lib.Board) int {
 			payout -= b.HardEight;
 			payout -= b.HardFour;
 			payout -= b.HardTen;
+
+			payout -= b.PassLine;
+			payout -= b.PassOdds;
+			payout += b.DontPass;
+
+			if (g.Point == 4 || g.Point == 10) {
+				payout += b.DontPass / 2;
+			}
+			if (g.Point == 5 || g.Point == 9) {
+				payout += b.DontPass / 3 * 2;
+			}
+			if (g.Point == 6 || g.Point == 8) {
+				payout += b.DontPass / 6 * 5;
+			}
 		case 8:
 			payout += b.ComeEight;
 			payout += b.ComeEightOdds / 5 * 6;

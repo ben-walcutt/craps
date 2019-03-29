@@ -1,6 +1,6 @@
 package lib
 
-//import "fmt"
+// import "fmt"
 
 const PAYOUT_OFFSET = 1.2;
 
@@ -68,23 +68,23 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 		}
 		if (g.ComeFive) {
 			b.ComeFive = s.ComeAmt * g.Unit;
-		b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
+			b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
 		}
 		if (g.ComeSix) {
 			b.ComeSix = s.ComeAmt * g.Unit;
-		b.ComeSixOdds = s.ComeSixOdds * g.Unit;
+			b.ComeSixOdds = s.ComeSixOdds * g.Unit;
 		}
 		if (g.ComeEight) {
 			b.ComeEight = s.ComeAmt * g.Unit;
-		b.ComeEightOdds = s.ComeEightOdds * g.Unit;
+			b.ComeEightOdds = s.ComeEightOdds * g.Unit;
 		}
 		if (g.ComeNine) {
 			b.ComeNine = s.ComeAmt * g.Unit;
-		b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
+			b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
 		}
 		if (g.ComeTen) {
 			b.ComeTen = s.ComeAmt * g.Unit;
-		b.ComeTenOdds = s.ComeTenOdds * g.Unit;
+			b.ComeTenOdds = s.ComeTenOdds * g.Unit;
 		}
 
 		switch g.DontCome {
@@ -117,14 +117,18 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 	if (s.Field) {
 		b.Field = g.Unit;
 	}
-		
+
 	switch s.Line {
 	case 1:
-		b.PassLine = s.Line * g.Unit;
-		b.PassOdds = s.LineOdds * g.Unit;
+		b.PassLine = g.Unit;
+		if (g.Working) {
+			b.PassOdds = s.LineOdds * g.Unit;
+		}
 	case 2:
-		b.DontPass = s.Line * g.Unit;
-		b.DontOdds = s.LineOdds * g.Unit;
+		b.DontPass = g.Unit;
+		if (g.Working) {
+			b.DontOdds = s.LineOdds * g.Unit;
+		}
 	case 3:
 	}
 
