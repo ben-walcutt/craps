@@ -54,7 +54,7 @@ func main() {
 
 	if *isTest {
 		fmt.Println("Using test strategy");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 1,1,0,0,0, 0};
+		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Test Strategy";
@@ -173,21 +173,6 @@ func determinePayout(g lib.Game, b lib.Board) int {
 	diceTotal := g.Die1 + g.Die2;
 
 	if g.Working {
-		if g.Die1 == 3 && g.Die2 == 3 {
-			payout += b.HardSix * 9;
-		}
-	
-		if g.Die1 == 4 && g.Die2 == 4 {
-			payout += b.HardEight * 9;
-		}
-	
-		if g.Die1 == 2 && g.Die2 == 2 {
-			payout += b.HardFour * 7;
-		}
-	
-		if g.Die1 == 5 && g.Die2 == 5 {
-			payout += b.HardTen * 7;
-		}
 
 		switch diceTotal {
 		case 2:
@@ -208,6 +193,14 @@ func determinePayout(g lib.Game, b lib.Board) int {
 				payout += b.PassOdds  * 2;
 				payout -= b.DontPass;
 				payout -= b.DontOdds;
+			}
+
+			if (b.HardFour > 0) {
+				if g.Die1 == 2 && g.Die2 == 2 {
+					payout += b.HardFour * 7;
+				} else {
+					payout -= b.HardFour;
+				}
 			}
 		case 5:
 			payout += b.ComeFive;
@@ -234,6 +227,13 @@ func determinePayout(g lib.Game, b lib.Board) int {
 				payout += b.PassOdds / 5 * 6;
 				payout -= b.DontPass;
 				payout -= b.DontOdds;
+			}
+			if (b.HardSix > 0) {
+				if g.Die1 == 3 && g.Die2 == 3 {
+					payout += b.HardSix * 9;
+				} else {
+					payout -= b.HardSix;
+				}
 			}
 		case 7:
 			payout += b.Come;
@@ -301,6 +301,13 @@ func determinePayout(g lib.Game, b lib.Board) int {
 				payout -= b.DontPass;
 				payout -= b.DontOdds;
 			}
+			if (b.HardEight > 0) {
+				if g.Die1 == 4 && g.Die2 == 4 {
+					payout += b.HardEight * 9;
+				} else {
+					payout -= b.HardEight;
+				}
+			}
 		case 9:
 			payout += b.ComeNine;
 			payout += b.ComeNineOdds / 2 * 3;
@@ -326,6 +333,13 @@ func determinePayout(g lib.Game, b lib.Board) int {
 				payout += b.PassOdds  * 2;
 				payout -= b.DontPass;
 				payout -= b.DontOdds;
+			}
+			if (b.HardTen > 0) {
+				if g.Die1 == 5 && g.Die2 == 5 {
+					payout += b.HardTen * 7;
+				} else {
+					payout -= b.HardTen;
+				}
 			}
 		case 11:
 			payout += b.Come;
