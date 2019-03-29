@@ -2,7 +2,7 @@
 
 Genetic algorithm for finding optimal craps strategy
 
-The game comes with several arguments:
+The program comes with several arguments:
 
 - -c: how many children you want to generate
   - default: 20
