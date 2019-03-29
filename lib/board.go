@@ -62,18 +62,30 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 		b.PlaceEight = int(float64(s.PlaceEightAmt * g.Unit) * PAYOUT_OFFSET);
 		b.PlaceNine = s.PlaceNineAmt * g.Unit;
 		b.PlaceTen = s.PlaceTenAmt * g.Unit;
-		b.ComeFour = s.ComeAmt * g.Unit;
-		b.ComeFourOdds = s.ComeFourOdds * g.Unit;
-		b.ComeFive = s.ComeAmt * g.Unit;
+		if (g.ComeFour) {
+			b.ComeFour = s.ComeAmt * g.Unit;
+			b.ComeFourOdds = s.ComeFourOdds * g.Unit;
+		}
+		if (g.ComeFive) {
+			b.ComeFive = s.ComeAmt * g.Unit;
 		b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
-		b.ComeSix = s.ComeAmt * g.Unit;
+		}
+		if (g.ComeSix) {
+			b.ComeSix = s.ComeAmt * g.Unit;
 		b.ComeSixOdds = s.ComeSixOdds * g.Unit;
-		b.ComeEight = s.ComeAmt * g.Unit;
+		}
+		if (g.ComeEight) {
+			b.ComeEight = s.ComeAmt * g.Unit;
 		b.ComeEightOdds = s.ComeEightOdds * g.Unit;
-		b.ComeNine = s.ComeAmt * g.Unit;
+		}
+		if (g.ComeNine) {
+			b.ComeNine = s.ComeAmt * g.Unit;
 		b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
-		b.ComeTen = s.ComeAmt * g.Unit;
+		}
+		if (g.ComeTen) {
+			b.ComeTen = s.ComeAmt * g.Unit;
 		b.ComeTenOdds = s.ComeTenOdds * g.Unit;
+		}
 
 		switch g.DontCome {
 		case 4:
