@@ -10,12 +10,15 @@ type Game struct {
 
 	DontCome int
 	Working bool
+
+	Unit int
+
+	HornOn int
+
 	Point int
 
 	Die1 int
 	Die2 int
-
-	Unit int
 }
 
 func NewGame (unit int) Game {

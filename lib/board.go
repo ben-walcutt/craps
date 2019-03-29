@@ -45,6 +45,11 @@ type Board struct {
 	HardFour int
 	HardTen int
 
+	HornTwo int
+	HornThree int
+	HornEleven int
+	HornTwelve int
+
 	PassLine int
 	PassOdds int
 	DontPass int
@@ -118,6 +123,13 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 		b.Field = g.Unit;
 	}
 
+	if (g.HornOn == 1) {
+		b.HornTwo = s.HornTwo;
+		b.HornThree = s.HornThree;
+		b.HornEleven = s.HornEleven;
+		b.HornTwelve = s.HornTwelve;
+	}
+
 	switch s.Line {
 	case 1:
 		b.PassLine = g.Unit;
@@ -182,6 +194,11 @@ func (b *Board) validateWager(amount int) (valid bool, wager int) {
 	wager += b.HardEight;
 	wager += b.HardFour;
 	wager += b.HardTen;
+
+	wager += b.HornTwo;
+	wager += b.HornThree;
+	wager += b.HornEleven;
+	wager += b.HornTwelve;
 
 	wager += b.PassLine;
 	wager += b.PassOdds;

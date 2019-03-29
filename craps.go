@@ -54,21 +54,21 @@ func main() {
 
 	if *isTest {
 		fmt.Println("Using test strategy");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1};
+		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,1,1,1,1};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Test Strategy";
 		fmt.Println("");
 	} else if *namedStrategy == "Field" {
 		fmt.Println("Using Field strategy");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 0,0,0,0,0, 0};
+		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 0,0,0,0,0, 0,0,0,0,0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Field Only";
 		fmt.Println("");
 	} else if *namedStrategy == "Iron Cross" {
 		fmt.Println("Using Iron Cross");
-		testCase := [42]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 0,0,0,0,0, 0};
+		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 0,0,0,0,0, 0,0,0,0,0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Iron Cross";
@@ -378,6 +378,8 @@ func determinePayout(g lib.Game, b lib.Board) int {
 		}
 	}
 
+
+	// handling field payout
 	switch diceTotal {
 	case 2:
 		payout += b.Field  * FIELD_TWO_MULTIPLIER;
@@ -401,6 +403,35 @@ func determinePayout(g lib.Game, b lib.Board) int {
 		payout += b.Field;
 	case 11:
 		payout += b.Field;
+	}
+
+	//handling horn payout
+	switch diceTotal {
+	case 2:
+		payout += b.HornTwo * 30;
+		payout -= b.HornThree;
+		payout -= b.HornEleven;
+		payout -= b.HornTwelve;
+	case 3:
+		payout -= b.HornTwo;
+		payout += b.HornThree * 15;
+		payout -= b.HornEleven;
+		payout -= b.HornTwelve;
+	case 11:
+		payout -= b.HornTwo;
+		payout -= b.HornThree;
+		payout += b.HornEleven;
+		payout -= b.HornTwelve;
+	case 12:
+		payout -= b.HornTwo;
+		payout -= b.HornThree;
+		payout -= b.HornEleven;
+		payout += b.HornTwelve * 30;
+	default:
+		payout -= b.HornTwo;
+		payout -= b.HornThree;
+		payout -= b.HornEleven;
+		payout -= b.HornTwelve;
 	}
 
 	if verboseOutput {
@@ -521,6 +552,12 @@ func updateGame(g lib.Game, s lib.Strategy) lib.Game {
 			g.Point = 10;
 			g.Working = true;
 		}
+	}
+
+	if (diceTotal == 2 || diceTotal == 3 || diceTotal == 11 || diceTotal == 12) {
+		g.HornOn = 1;
+	} else {
+		g.HornOn = 0;
 	}
 
 	return g;

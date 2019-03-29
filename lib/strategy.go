@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const NUM_OF_PARAMS = 42;
+const NUM_OF_PARAMS = 46;
 
 type Strategy struct {
 	Come bool
@@ -58,6 +58,11 @@ type Strategy struct {
 	HardFour int
 
 	HardTen int
+	HornTwo int
+	HornThree int
+	HornEleven int
+	HornTwelve int
+
 	Amount int
 	Name string
 }
@@ -105,6 +110,10 @@ func BuildStrategy(code [NUM_OF_PARAMS]int) *Strategy {
 		HardEight: code[38],
 		HardFour: code[39],
 		HardTen: code[40],
+		HornTwo: code[41],
+		HornThree: code[42],
+		HornEleven: code[43],
+		HornTwelve: code[44],
 	}
 
 	s.Name = "Stanley Hudson";
@@ -158,6 +167,10 @@ func CombineStrategies(s1 Strategy, s2 Strategy) *Strategy {
 		s1code[38],
 		s2code[39],
 		s1code[40],
+		s2code[41],
+		s1code[42],
+		s2code[43],
+		s1code[44],
 	}
 
 	return BuildStrategy(i);
@@ -173,6 +186,7 @@ func (s Strategy) Encode() [NUM_OF_PARAMS]int {
 		s.ComeEightOdds,
 		s.ComeNineOdds,
 		s.ComeTenOdds,
+
 		BtoI(s.DontCome),
 		s.DontComeAmt,
 		BtoI(s.DontComeFour),
@@ -187,6 +201,7 @@ func (s Strategy) Encode() [NUM_OF_PARAMS]int {
 		s.DontComeNineOdds,
 		BtoI(s.DontComeTen),
 		s.DontComeTenOdds,
+
 		BtoI(s.PlaceFour),
 		s.PlaceFourAmt,
 		BtoI(s.PlaceFive),
@@ -199,13 +214,22 @@ func (s Strategy) Encode() [NUM_OF_PARAMS]int {
 		s.PlaceNineAmt,
 		BtoI(s.PlaceTen),
 		s.PlaceTenAmt,
+
 		BtoI(s.Field),
+
 		s.Line,
 		s.LineOdds,
+
 		s.HardSix,
 		s.HardEight,
 		s.HardFour,
 		s.HardTen,
+
+		s.HornTwo,
+		s.HornThree,
+		s.HornEleven,
+		s.HornTwelve,
+
 		s.Amount,
 	}
 
@@ -263,6 +287,12 @@ func GenerateStrategyCode(MAX_BET int) [NUM_OF_PARAMS]int {
 		randgen.Intn(2),
 		randgen.Intn(2),
 		randgen.Intn(2),
+
+		randgen.Intn(2),
+		randgen.Intn(2),
+		randgen.Intn(2),
+		randgen.Intn(2),
+
 		0,
 	}
 
