@@ -96,12 +96,15 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 			b.DontComeTenOdds = s.DontComeTenOdds * g.Unit;
 		}
 
-		b.HardSix = g.Unit;
-		b.HardEight = g.Unit;
-		b.HardFour = g.Unit;
-		b.HardTen = g.Unit;
+		b.HardSix = s.HardSix;
+		b.HardEight = s.HardEight;
+		b.HardFour = s.HardFour;
+		b.HardTen = s.HardTen;
 	}
-	b.Field = g.Unit;
+
+	if (s.Field) {
+		b.Field = g.Unit;
+	}
 		
 	switch s.Line {
 	case 1:

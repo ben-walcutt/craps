@@ -53,11 +53,11 @@ type Strategy struct {
 	Line int
 	LineOdds int
 	// TODO: add line odds for each point number
-	HardSix bool
-	HardEight bool
-	HardFour bool
+	HardSix int
+	HardEight int
+	HardFour int
 
-	HardTen bool
+	HardTen int
 	Amount int
 	Name string
 }
@@ -101,10 +101,10 @@ func BuildStrategy(code [NUM_OF_PARAMS]int) *Strategy {
 		Field: ItoB(code[34]),
 		Line: code[35],
 		LineOdds: code[36],
-		HardSix: ItoB(code[37]),
-		HardEight: ItoB(code[38]),
-		HardFour: ItoB(code[39]),
-		HardTen: ItoB(code[40]),
+		HardSix: code[37],
+		HardEight: code[38],
+		HardFour: code[39],
+		HardTen: code[40],
 	}
 
 	s.Name = "Stanley Hudson";
@@ -202,10 +202,10 @@ func (s Strategy) Encode() [NUM_OF_PARAMS]int {
 		BtoI(s.Field),
 		s.Line,
 		s.LineOdds,
-		BtoI(s.HardSix),
-		BtoI(s.HardEight),
-		BtoI(s.HardFour),
-		BtoI(s.HardTen),
+		s.HardSix,
+		s.HardEight,
+		s.HardFour,
+		s.HardTen,
 		s.Amount,
 	}
 
