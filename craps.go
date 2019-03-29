@@ -78,7 +78,29 @@ func main() {
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Come Only";
 		fmt.Println("");
+	} else if *namedStrategy == "22 Inside" {
+		fmt.Println("Using 22 Inside strategy");
+		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,0, 0,0,0,0,0, 0,0,0,0,0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "22 Inside";
+		fmt.Println("");
+	} else if *namedStrategy == "20 Outside" {
+		fmt.Println("Using 20 Outside strategy");
+		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "20 Outside";
+		fmt.Println("");
+	} else if *namedStrategy == "32 Across" {
+		fmt.Println("Using 32 Across strategy");
+		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1,1,1,1,1, 1,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "32 Across";
+		fmt.Println("");
 	} else {
+		fmt.Println("Not a valid named strategy.");
 		for i:=0; i < *numOfChildren; i++ {
 			time.Sleep(1);
 			code := lib.GenerateStrategyCode(MAX_BET);
