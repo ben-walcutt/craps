@@ -61,37 +61,21 @@ type Board struct {
 func (b *Board) PlaceBets(s *Strategy, g Game) int {
 
 	if g.Working {
+
+		// place bets
 		b.PlaceFour = s.PlaceFourAmt * g.Unit;
 		b.PlaceFive = s.PlaceFiveAmt * g.Unit;
 		b.PlaceSix = int(float64(s.PlaceSixAmt * g.Unit) * PAYOUT_OFFSET);
 		b.PlaceEight = int(float64(s.PlaceEightAmt * g.Unit) * PAYOUT_OFFSET);
 		b.PlaceNine = s.PlaceNineAmt * g.Unit;
 		b.PlaceTen = s.PlaceTenAmt * g.Unit;
-		if (g.ComeFour) {
-			b.ComeFour = s.ComeAmt * g.Unit;
-			b.ComeFourOdds = s.ComeFourOdds * g.Unit;
-		}
-		if (g.ComeFive) {
-			b.ComeFive = s.ComeAmt * g.Unit;
-			b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
-		}
-		if (g.ComeSix) {
-			b.ComeSix = s.ComeAmt * g.Unit;
-			b.ComeSixOdds = s.ComeSixOdds * g.Unit;
-		}
-		if (g.ComeEight) {
-			b.ComeEight = s.ComeAmt * g.Unit;
-			b.ComeEightOdds = s.ComeEightOdds * g.Unit;
-		}
-		if (g.ComeNine) {
-			b.ComeNine = s.ComeAmt * g.Unit;
-			b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
-		}
-		if (g.ComeTen) {
-			b.ComeTen = s.ComeAmt * g.Unit;
-			b.ComeTenOdds = s.ComeTenOdds * g.Unit;
+
+		// main come bet
+		if s.Come {
+			b.Come = s.ComeAmt * g.Unit;
 		}
 
+		// dont come bets
 		switch g.DontCome {
 		case 4:
 			b.DontComeFour = s.DontComeAmt * g.Unit;
@@ -113,16 +97,45 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 			b.DontComeTenOdds = s.DontComeTenOdds * g.Unit;
 		}
 
+		// hard ways
 		b.HardSix = s.HardSix;
 		b.HardEight = s.HardEight;
 		b.HardFour = s.HardFour;
 		b.HardTen = s.HardTen;
 	}
 
+	// come bets
+	if (g.ComeFour) {
+		b.ComeFour = s.ComeAmt * g.Unit;
+		b.ComeFourOdds = s.ComeFourOdds * g.Unit;
+	}
+	if (g.ComeFive) {
+		b.ComeFive = s.ComeAmt * g.Unit;
+		b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
+	}
+	if (g.ComeSix) {
+		b.ComeSix = s.ComeAmt * g.Unit;
+		b.ComeSixOdds = s.ComeSixOdds * g.Unit;
+	}
+	if (g.ComeEight) {
+		b.ComeEight = s.ComeAmt * g.Unit;
+		b.ComeEightOdds = s.ComeEightOdds * g.Unit;
+	}
+	if (g.ComeNine) {
+		b.ComeNine = s.ComeAmt * g.Unit;
+		b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
+	}
+	if (g.ComeTen) {
+		b.ComeTen = s.ComeAmt * g.Unit;
+		b.ComeTenOdds = s.ComeTenOdds * g.Unit;
+	}
+
+	// field bet
 	if (s.Field) {
 		b.Field = g.Unit;
 	}
 
+	// horn bets
 	if (g.HornOn == 1) {
 		b.HornTwo = s.HornTwo;
 		b.HornThree = s.HornThree;
@@ -130,6 +143,7 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 		b.HornTwelve = s.HornTwelve;
 	}
 
+	// line bets
 	switch s.Line {
 	case 1:
 		b.PassLine = g.Unit;

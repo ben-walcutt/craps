@@ -20,8 +20,6 @@ type Game struct {
 
 	DontCome int
 	Working bool
-
-	StartingAmount int
 	Unit int
 
 	HornOn int

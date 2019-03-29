@@ -66,10 +66,17 @@ func main() {
 		fmt.Println("");
 	} else if *namedStrategy == "Iron Cross" {
 		fmt.Println("Using Iron Cross");
-		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 0,0,0,0,0, 0,0,0,0,0};
+		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 1,3,0,0,0, 0,0,0,0,0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Iron Cross";
+		fmt.Println("");
+	} else if *namedStrategy == "Come" {
+		fmt.Println("Using Come strategy");
+		testCase := [46]int {1,1,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Come Only";
 		fmt.Println("");
 	} else {
 		for i:=0; i < *numOfChildren; i++ {
@@ -129,12 +136,10 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 		game.Die2 = d2;
 
 		var payout = game.DeterminePayout(board);
+		s.Amount += payout;
+		
 		if verboseOutput {
 			fmt.Println("payout: ", payout);
-		}
-		s.Amount += payout;
-
-		if verboseOutput {
 			fmt.Println("wager: ", wager);
 			fmt.Println("current balance: ", s.Amount);
 			fmt.Println("current game: ", game);
