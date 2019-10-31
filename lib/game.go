@@ -39,6 +39,7 @@ func NewGame (unit int) Game {
 }
 
 func (g Game) Roll() (d1, d2 int) {
+	//TODO: add the randgen to the game object itself
 	seed := rand.NewSource(time.Now().UnixNano());
 	randgen := rand.New(seed);
 
