@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const NUM_OF_PARAMS = 46;
+const NUM_OF_PARAMS = 47;
 
 type Strategy struct {
 	Come bool
@@ -63,6 +63,8 @@ type Strategy struct {
 	HornEleven int
 	HornTwelve int
 
+	CrapCheck bool
+
 	Amount int
 	Name string
 }
@@ -74,46 +76,56 @@ func BuildStrategy(code [NUM_OF_PARAMS]int) *Strategy {
 		ComeFourOdds: code[2],
 		ComeFiveOdds: code[3],
 		ComeSixOdds: code[4],
+
 		ComeEightOdds: code[5],
 		ComeNineOdds: code[6],
 		ComeTenOdds: code[7],
 		DontCome: ItoB(code[8]),
 		DontComeAmt: code[9],
+
 		DontComeFour: ItoB(code[10]),
 		DontComeFourOdds: code[11],
 		DontComeFive: ItoB(code[12]),
 		DontComeFiveOdds: code[13],
 		DontComeSix: ItoB(code[14]),
+
 		DontComeSixOdds: code[15],
 		DontComeEight: ItoB(code[16]),
 		DontComeEightOdds: code[17],
 		DontComeNine: ItoB(code[18]),
 		DontComeNineOdds: code[19],
+
 		DontComeTen: ItoB(code[20]),
 		DontComeTenOdds: code[21],
 		PlaceFour: ItoB(code[22]),
 		PlaceFourAmt: code[23],
 		PlaceFive: ItoB(code[24]),
+
 		PlaceFiveAmt: code[25],
 		PlaceSix: ItoB(code[26]),
 		PlaceSixAmt: code[27],
 		PlaceEight: ItoB(code[28]),
 		PlaceEightAmt: code[29],
+
 		PlaceNine: ItoB(code[30]),
 		PlaceNineAmt: code[31],
 		PlaceTen: ItoB(code[32]),
 		PlaceTenAmt: code[33],
 		Field: ItoB(code[34]),
+
 		Line: code[35],
 		LineOdds: code[36],
 		HardSix: code[37],
 		HardEight: code[38],
 		HardFour: code[39],
+
 		HardTen: code[40],
 		HornTwo: code[41],
 		HornThree: code[42],
 		HornEleven: code[43],
 		HornTwelve: code[44],
+
+		CrapCheck: ItoB(code[45]),
 	}
 
 	s.Name = "Stanley Hudson";
@@ -171,6 +183,7 @@ func CombineStrategies(s1 Strategy, s2 Strategy) *Strategy {
 		s1code[42],
 		s2code[43],
 		s1code[44],
+		s2code[45],
 	}
 
 	return BuildStrategy(i);
@@ -229,6 +242,8 @@ func (s Strategy) Encode() [NUM_OF_PARAMS]int {
 		s.HornThree,
 		s.HornEleven,
 		s.HornTwelve,
+
+		BtoI(s.CrapCheck),
 
 		s.Amount,
 	}
@@ -291,6 +306,8 @@ func GenerateStrategyCode(MAX_BET int) [NUM_OF_PARAMS]int {
 		randgen.Intn(2),
 		randgen.Intn(2),
 		randgen.Intn(2),
+		randgen.Intn(2),
+
 		randgen.Intn(2),
 
 		0,

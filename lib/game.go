@@ -8,7 +8,6 @@ import (
 
 const FIELD_TWO_MULTIPLIER = 2;
 const FIELD_TWELVE_MULTIPLIER = 2;
-const UNIT_AMT = 5;
 
 type Game struct {
 	ComeFour bool
@@ -293,29 +292,51 @@ func (g Game) DeterminePayout(b Board) int {
 	switch diceTotal {
 	case 2:
 		payout += b.HornTwo * 30;
+		payout += b.Crap * 7;
 		payout -= b.HornThree;
 		payout -= b.HornEleven;
 		payout -= b.HornTwelve;
+		payout -= b.Eleven;
+		payout -= b.BigRed;
 	case 3:
 		payout -= b.HornTwo;
 		payout += b.HornThree * 15;
+		payout += b.Crap * 7;
 		payout -= b.HornEleven;
 		payout -= b.HornTwelve;
+		payout -= b.Eleven;
+		payout -= b.BigRed;
+	case 7:
+		payout += b.BigRed * 4;
+		payout -= b.HornTwo;
+		payout -= b.HornThree;
+		payout -= b.HornEleven;
+		payout -= b.HornTwelve;
+		payout -= b.Crap;
+		payout -= b.Eleven;
 	case 11:
 		payout -= b.HornTwo;
 		payout -= b.HornThree;
 		payout += b.HornEleven * 15;
+		payout += b.Eleven * 15;
 		payout -= b.HornTwelve;
+		payout -= b.BigRed;
 	case 12:
 		payout -= b.HornTwo;
 		payout -= b.HornThree;
 		payout -= b.HornEleven;
 		payout += b.HornTwelve * 30;
+		payout += b.Crap * 7;
+		payout -= b.Eleven;
+		payout -= b.BigRed;
 	default:
 		payout -= b.HornTwo;
 		payout -= b.HornThree;
 		payout -= b.HornEleven;
 		payout -= b.HornTwelve;
+		payout -= b.Crap;
+		payout -= b.Eleven;
+		payout -= b.BigRed;
 	}
 	return payout;
 }
@@ -335,8 +356,9 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 		switch diceTotal {
 		case 4:
 			if g.Point == 4 {
-				g = NewGame(UNIT_AMT);
+				g = NewGame(g.Unit);
 				if verboseOutput {
+					fmt.Println("");
 					fmt.Println("win 4");
 				}
 			} else {
@@ -347,8 +369,9 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			}
 		case 5:
 			if g.Point == 5 {
-				g = NewGame(UNIT_AMT);
+				g = NewGame(g.Unit);
 				if verboseOutput {
+					fmt.Println("");
 					fmt.Println("win 5");
 				}
 			} else {
@@ -359,8 +382,9 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			}
 		case 6:
 			if g.Point == 6 {
-				g = NewGame(UNIT_AMT);
+				g = NewGame(g.Unit);
 				if verboseOutput {
+					fmt.Println("");
 					fmt.Println("win 6");
 				}
 			} else {
@@ -370,14 +394,16 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 				}
 			}
 		case 7:
-			g = NewGame(UNIT_AMT);
+			g = NewGame(g.Unit);
 			if verboseOutput {
+				fmt.Println("");
 				fmt.Println("seven out");
 			}
 		case 8:
 			if g.Point == 8 {
-				g = NewGame(UNIT_AMT);
+				g = NewGame(g.Unit);
 				if verboseOutput {
+					fmt.Println("");
 					fmt.Println("win 8");
 				}
 			} else {
@@ -388,8 +414,9 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			}
 		case 9:
 			if g.Point == 9 {
-				g = NewGame(UNIT_AMT);
+				g = NewGame(g.Unit);
 				if verboseOutput {
+					fmt.Println("");
 					fmt.Println("win 9");
 				}
 			} else {
@@ -400,8 +427,9 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			}
 		case 10:
 			if g.Point == 10 {
-				g = NewGame(UNIT_AMT);
+				g = NewGame(g.Unit);
 				if verboseOutput {
+					fmt.Println("");
 					fmt.Println("win 10");
 				}
 			} else {
@@ -416,24 +444,49 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 		case 4:
 			g.Point = 4;
 			g.Working = true;
+			if verboseOutput {
+				fmt.Println("");
+				fmt.Println("point set at 4");
+			}
 		case 5:
 			g.Point = 5;
 			g.Working = true;
+			if verboseOutput {
+				fmt.Println("");
+				fmt.Println("point set at 5");
+			}
 		case 6:
 			g.Point = 6;
 			g.Working = true;
+			if verboseOutput {
+				fmt.Println("");
+				fmt.Println("point set at 6");
+			}
 		case 8:
 			g.Point = 8;
 			g.Working = true;
+			if verboseOutput {
+				fmt.Println("");
+				fmt.Println("point set at 8");
+			}
 		case 9:
 			g.Point = 9;
 			g.Working = true;
+			if verboseOutput {
+				fmt.Println("");
+				fmt.Println("point set at 9");
+			}
 		case 10:
 			g.Point = 10;
 			g.Working = true;
+			if verboseOutput {
+				fmt.Println("");
+				fmt.Println("point set at 10");
+			}
 		}
 	}
 
+	// playing see a horn, bet a horn because playing a horn constantly is dumb
 	if (diceTotal == 2 || diceTotal == 3 || diceTotal == 11 || diceTotal == 12) {
 		g.HornOn = 1;
 	} else {

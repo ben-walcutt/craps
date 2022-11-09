@@ -5,22 +5,28 @@ import (
 	"fmt"
 	"flag"
 	"time"
+	"strings"
+	"strconv"
 )
 
 var verboseOutput bool = false;
 
+const NUM_OF_PARAMS = 47;
 const MAX_BET  = 2;
-const UNIT_AMT = 5;
 const PAYOUT_OFFSET = 1.2;
+// blank strategy -> [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0};
+
 
 func main() {
 	namedStrategy := flag.String("n", "", "Name of Strategy (children and iterations will be 1)");
 	numOfChildren := flag.Int("c", 20, "Number of children");
 	numOfRolls := flag.Int("r", 20, "Number of rolls");
-	numOfIterations := flag.Int("i", 1000, "Number of iterations");
+	numOfIterations := flag.Int("i", 1, "Number of iterations");
 	isTest := flag.Bool("t", false, "Run Test Strategy");
 	verbose := flag.Bool("v", false, "Verbose output");
 	amount := flag.Int("a", 300, "Starting amount");
+	unit_amt := flag.Int("u", 5, "Table Minimum");
+	manual := flag.Bool("m", false, "Manual Roll");
 
 	flag.Parse();
 
@@ -28,7 +34,6 @@ func main() {
 		if *namedStrategy != "" {
 			fmt.Println("name of strategy:     ", *namedStrategy);
 			*numOfChildren = 1;
-			*numOfIterations = 1;
 		}
 		if *isTest {
 			fmt.Println("is test strategy:     ", *isTest);
@@ -44,6 +49,15 @@ func main() {
 		verboseOutput = true;
 	} else {
 		verboseOutput = false;
+
+		if *namedStrategy != "" {
+			*numOfChildren = 1;
+		}
+		if *isTest {
+			*numOfChildren = 1;
+			*numOfIterations = 1;
+			verboseOutput = true;
+		}
 	}
 
 	var STARTING_AMT = *amount;
@@ -52,55 +66,67 @@ func main() {
 
 	if *isTest {
 		fmt.Println("Using test strategy");
-		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,1,1,1,1};
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 1,1,0,0,0, 0,0,0,0,0, 1};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Test Strategy";
 		fmt.Println("");
 	} else if *namedStrategy == "Field" {
 		fmt.Println("Using Field strategy");
-		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 0,0,0,0,0, 0,0,0,0,0};
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 0,0,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Field Only";
 		fmt.Println("");
-	} else if *namedStrategy == "Iron Cross" {
+	} else if *namedStrategy == "Iron" {
 		fmt.Println("Using Iron Cross");
-		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 1,3,0,0,0, 0,0,0,0,0};
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 0,0,0,0,1, 1,3,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Iron Cross";
 		fmt.Println("");
 	} else if *namedStrategy == "Come" {
 		fmt.Println("Using Come strategy");
-		testCase := [46]int {1,1,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0};
+		testCase := [NUM_OF_PARAMS]int {1,1,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Come Only";
 		fmt.Println("");
-	} else if *namedStrategy == "22 Inside" {
+	} else if *namedStrategy == "22" {
 		fmt.Println("Using 22 Inside strategy");
-		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,0, 0,0,0,0,0, 0,0,0,0,0};
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 1,1,1,1,1, 1,1,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "22 Inside";
 		fmt.Println("");
-	} else if *namedStrategy == "20 Outside" {
+	} else if *namedStrategy == "20" {
 		fmt.Println("Using 20 Outside strategy");
-		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0};
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1,0,0,0,0, 1,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "20 Outside";
 		fmt.Println("");
-	} else if *namedStrategy == "32 Across" {
+	} else if *namedStrategy == "32" {
 		fmt.Println("Using 32 Across strategy");
-		testCase := [46]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1,1,1,1,1, 1,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0};
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,1,1,1, 1,1,1,1,1, 1,1,1,1,0, 0,0,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "32 Across";
 		fmt.Println("");
+	} else if *namedStrategy == "Pass" {
+		fmt.Println("Using Pass Only");
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 1,1,0,0,0, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Pass Only";
+	} else if *namedStrategy == "SixEight" {
+		fmt.Println("Using Six Eight");
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,1,1,1,1, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Six Eight";
 	} else {
-		fmt.Println("Not a valid named strategy.");
+		fmt.Println("Algorithmically building best strategy");
 		for i:=0; i < *numOfChildren; i++ {
 			time.Sleep(1);
 			code := lib.GenerateStrategyCode(MAX_BET);
@@ -119,27 +145,26 @@ func main() {
 		fmt.Println("Running iteration: ", i);
 
 		for j:=0; j < *numOfChildren; j++ {
-
 			fmt.Println("Using strategy: ", j, " ", strategies[j].Name);
 
 			s := strategies[j];
 			fmt.Println(strategies[j].Encode());
-			runStrategy(s, *numOfRolls);
+			runStrategy(s, *numOfRolls, *unit_amt, *manual);
 		}
 
 		fmt.Println("");
 		fmt.Println("Results: ");
 
-		for i:=0; i < *numOfChildren; i++ {
-			fmt.Println(strategies[i].Encode());
+		for j:=0; j < *numOfChildren; j++ {
+			fmt.Println(strategies[j].Encode());
 		}
 
 		fmt.Println("");
 	}
 }
 
-func runStrategy(s *lib.Strategy, numOfRolls int) {
-	game := lib.NewGame(UNIT_AMT);
+func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool) {
+	game := lib.NewGame(unit_amt);
 
 	minBalance := s.Amount;
 	maxBalance := s.Amount;
@@ -153,7 +178,20 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 			break;
 		}
 
-		d1, d2 := game.Roll();
+		var d1 int;
+		var d2 int;
+
+		if manual {
+			fmt.Println("\nRoll: ");
+			var input string;
+			fmt.Scanln(&input);
+			dice := strings.Split(input, ",");
+			d1, _ = strconv.Atoi(dice[0]);
+			d2, _ = strconv.Atoi(dice[1]);
+		} else {
+			d1, d2 = game.Roll();
+		}
+
 		game.Die1 = d1;
 		game.Die2 = d2;
 
@@ -161,15 +199,23 @@ func runStrategy(s *lib.Strategy, numOfRolls int) {
 		s.Amount += payout;
 		
 		if verboseOutput {
-			fmt.Println("payout: ", payout);
-			fmt.Println("wager: ", wager);
-			fmt.Println("current balance: ", s.Amount);
-			fmt.Println("current game: ", game);
+			fmt.Println("working?			", game.Working);
+			if game.Working {
+				fmt.Println("point: 				", game.Point);
+			}
+			fmt.Println("d1:     			", d1);
+			fmt.Println("d2:     			", d2);
+			fmt.Println("wager: 				", wager);
+			fmt.Println("payout: 			", payout);
+			fmt.Println("current balance: 	", s.Amount);
+			fmt.Println("current game: 		", game);
 		}
 
 		game = game.UpdateGame(*s, verboseOutput);
 
-		fmt.Println("");
+		if verboseOutput {
+			fmt.Println("");
+		}
 
 		if s.Amount < minBalance {
 			minBalance = s.Amount;

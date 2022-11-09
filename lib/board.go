@@ -55,6 +55,10 @@ type Board struct {
 	DontPass int
 	DontOdds int
 
+	Crap int
+	Eleven int
+	BigRed int
+
 	Field int
 }
 
@@ -145,17 +149,22 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 
 	// line bets
 	switch s.Line {
-	case 1:
-		b.PassLine = g.Unit;
-		if (g.Working) {
-			b.PassOdds = s.LineOdds * g.Unit;
-		}
-	case 2:
-		b.DontPass = g.Unit;
-		if (g.Working) {
-			b.DontOdds = s.LineOdds * g.Unit;
-		}
-	case 3:
+		case 1:
+			b.PassLine = g.Unit;
+			if (g.Working) {
+				b.PassOdds = s.LineOdds * g.Unit;
+			} else if (s.CrapCheck) {
+				b.Crap = 1;
+			}
+		case 2:
+			b.DontPass = g.Unit;
+			if (g.Working) {
+				b.DontOdds = s.LineOdds * g.Unit;
+			} else if (s.CrapCheck) {
+				b.Eleven = 1;
+				b.BigRed = 2;
+			}
+		case 3:
 	}
 
 	valid, wager := b.validateWager(s.Amount);
@@ -220,6 +229,10 @@ func (b *Board) validateWager(amount int) (valid bool, wager int) {
 	wager += b.DontOdds;
 
 	wager += b.Field;
+
+	wager += b.Crap;
+	wager += b.Eleven;
+	wager += b.BigRed;
 
 	return wager <= amount, wager;
 }
