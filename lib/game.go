@@ -6,9 +6,6 @@ import (
 	"fmt"
 )
 
-const FIELD_TWO_MULTIPLIER = 2;
-const FIELD_TWELVE_MULTIPLIER = 2;
-
 type Game struct {
 	ComeFour bool
 	ComeFive bool
@@ -49,7 +46,7 @@ func (g Game) Roll() (d1, d2 int) {
 	return d1, d2;
 }
 
-func (g Game) DeterminePayout(b Board) int {
+func (g Game) DeterminePayout(b Board, tripleField bool) int {
 	payout := 0;
 
 	diceTotal := g.Die1 + g.Die2;
@@ -72,7 +69,7 @@ func (g Game) DeterminePayout(b Board) int {
 
 			if g.Point == 4 {
 				payout += b.PassLine;
-				payout += b.PassOdds  * 2;
+				payout += b.PassOdds * 2;
 				payout -= b.DontPass;
 				payout -= b.DontOdds;
 			}
@@ -162,13 +159,13 @@ func (g Game) DeterminePayout(b Board) int {
 			payout += b.DontPass;
 
 			if (g.Point == 4 || g.Point == 10) {
-				payout += b.DontPass / 2;
+				payout += b.DontOdds / 2;
 			}
 			if (g.Point == 5 || g.Point == 9) {
-				payout += b.DontPass / 3 * 2;
+				payout += b.DontOdds / 3 * 2;
 			}
 			if (g.Point == 6 || g.Point == 8) {
-				payout += b.DontPass / 6 * 5;
+				payout += b.DontOdds / 6 * 5;
 			}
 		case 8:
 			payout += b.ComeEight;
@@ -231,6 +228,8 @@ func (g Game) DeterminePayout(b Board) int {
 		}
 	} else {
 		// handling non working payout
+		// handle come on no working sevens because odds are returned to player and come bets lose
+		// handle dont come bets also on non working sevens
 		switch diceTotal {
 		case 4:
 			payout += 0;
@@ -261,13 +260,18 @@ func (g Game) DeterminePayout(b Board) int {
 		}
 	}
 
+	// handling don't come payouts on sevens
 
 	// handling field payout
 	switch diceTotal {
 	case 2:
-		payout += b.Field  * FIELD_TWO_MULTIPLIER;
+		payout += b.Field  * 2;
 	case 12:
-		payout += b.Field  * FIELD_TWELVE_MULTIPLIER;
+		if tripleField {
+			payout += b.Field  * 3;
+		} else {
+			payout += b.Field  * 2;
+		}
 	case 3:
 		payout += b.Field;
 	case 4:

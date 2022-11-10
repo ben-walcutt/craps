@@ -3,6 +3,9 @@ package lib
 // import "fmt"
 
 const PAYOUT_OFFSET = 1.2;
+const SIX_EIGHT_MAX_ODDS = 3;
+const FIVE_NINE_MAX_ODDS = 4;
+const FOUR_TEN_MAX_ODDS = 5;
 
 type Board struct {
 	PlaceFour int
@@ -83,22 +86,22 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 		switch g.DontCome {
 		case 4:
 			b.DontComeFour = s.DontComeAmt * g.Unit;
-			b.DontComeFourOdds = s.DontComeFourOdds * g.Unit;
+			b.DontComeFourOdds = s.DontComeFourOdds * g.Unit * 6;
 		case 5:
 			b.DontComeFive = s.DontComeAmt * g.Unit;
-			b.DontComeFiveOdds = s.DontComeFiveOdds * g.Unit;
+			b.DontComeFiveOdds = s.DontComeFiveOdds * g.Unit * 3;
 		case 6:
 			b.DontComeSix = s.DontComeAmt * g.Unit;
-			b.DontComeSixOdds = int(float64(s.DontComeSixOdds * g.Unit) * PAYOUT_OFFSET);
+			b.DontComeSixOdds = int(float64(s.DontComeSixOdds * g.Unit * 3) * PAYOUT_OFFSET);
 		case 8:
 			b.DontComeEight = s.DontComeAmt * g.Unit;
-			b.DontComeEightOdds = int(float64(s.DontComeEightOdds * g.Unit) * PAYOUT_OFFSET);
+			b.DontComeEightOdds = int(float64(s.DontComeEightOdds * g.Unit * 3) * PAYOUT_OFFSET);
 		case 9:
 			b.DontComeNine = s.DontComeAmt * g.Unit;
-			b.DontComeNineOdds = s.DontComeNineOdds * g.Unit;
+			b.DontComeNineOdds = s.DontComeNineOdds * g.Unit * 3;
 		case 10:
 			b.DontComeTen = s.DontComeAmt * g.Unit;
-			b.DontComeTenOdds = s.DontComeTenOdds * g.Unit;
+			b.DontComeTenOdds = s.DontComeTenOdds * g.Unit * 6;
 		}
 
 		// hard ways
@@ -111,27 +114,27 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 	// come bets
 	if (g.ComeFour) {
 		b.ComeFour = s.ComeAmt * g.Unit;
-		b.ComeFourOdds = s.ComeFourOdds * g.Unit;
+		b.ComeFourOdds = s.ComeFourOdds * g.Unit * FOUR_TEN_MAX_ODDS;
 	}
 	if (g.ComeFive) {
 		b.ComeFive = s.ComeAmt * g.Unit;
-		b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit) * PAYOUT_OFFSET);
+		b.ComeFiveOdds = int(float64(s.ComeFiveOdds * g.Unit * FIVE_NINE_MAX_ODDS) * PAYOUT_OFFSET);
 	}
 	if (g.ComeSix) {
 		b.ComeSix = s.ComeAmt * g.Unit;
-		b.ComeSixOdds = s.ComeSixOdds * g.Unit;
+		b.ComeSixOdds = s.ComeSixOdds * g.Unit * SIX_EIGHT_MAX_ODDS;
 	}
 	if (g.ComeEight) {
 		b.ComeEight = s.ComeAmt * g.Unit;
-		b.ComeEightOdds = s.ComeEightOdds * g.Unit;
+		b.ComeEightOdds = s.ComeEightOdds * g.Unit * SIX_EIGHT_MAX_ODDS;
 	}
 	if (g.ComeNine) {
 		b.ComeNine = s.ComeAmt * g.Unit;
-		b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit) * PAYOUT_OFFSET);
+		b.ComeNineOdds = int(float64(s.ComeNineOdds * g.Unit * FIVE_NINE_MAX_ODDS) * PAYOUT_OFFSET);
 	}
 	if (g.ComeTen) {
 		b.ComeTen = s.ComeAmt * g.Unit;
-		b.ComeTenOdds = s.ComeTenOdds * g.Unit;
+		b.ComeTenOdds = s.ComeTenOdds * g.Unit * FOUR_TEN_MAX_ODDS;
 	}
 
 	// field bet
@@ -152,14 +155,40 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 		case 1:
 			b.PassLine = g.Unit;
 			if (g.Working) {
-				b.PassOdds = s.LineOdds * g.Unit;
+				switch g.Point {
+				case 4:
+					b.PassOdds = s.LineOdds * g.Unit * 100;
+				case 5:
+					b.PassOdds = int(float64(s.LineOdds * g.Unit * 100) * PAYOUT_OFFSET);
+				case 6:
+					b.PassOdds = s.LineOdds * g.Unit * 100;
+				case 8:
+					b.PassOdds = s.LineOdds * g.Unit * 100;
+				case 9:
+					b.PassOdds = int(float64(s.LineOdds * g.Unit * 100) * PAYOUT_OFFSET);
+				case 10:
+					b.PassOdds = s.LineOdds * g.Unit * 100;
+				}
 			} else if (s.CrapCheck) {
 				b.Crap = 1;
 			}
 		case 2:
 			b.DontPass = g.Unit;
 			if (g.Working) {
-				b.DontOdds = s.LineOdds * g.Unit;
+				switch g.Point {
+				case 4:
+					b.DontOdds = s.LineOdds * g.Unit * 6;
+				case 5:
+					b.DontOdds = s.LineOdds * g.Unit * 3;
+				case 6:
+					b.DontOdds = int(float64(s.LineOdds * g.Unit * 3) * PAYOUT_OFFSET);
+				case 8:
+					b.DontOdds = int(float64(s.LineOdds * g.Unit * 3) * PAYOUT_OFFSET);
+				case 9:
+					b.DontOdds = s.LineOdds * g.Unit * 3;
+				case 10:
+					b.DontOdds = s.LineOdds * g.Unit * 6;
+				}
 			} else if (s.CrapCheck) {
 				b.Eleven = 1;
 				b.BigRed = 2;

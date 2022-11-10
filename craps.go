@@ -27,6 +27,7 @@ func main() {
 	amount := flag.Int("a", 300, "Starting amount");
 	unit_amt := flag.Int("u", 5, "Table Minimum");
 	manual := flag.Bool("m", false, "Manual Roll");
+	triplefield := flag.Bool("f", false, "Triple 12 on field");
 
 	flag.Parse();
 
@@ -66,7 +67,7 @@ func main() {
 
 	if *isTest {
 		fmt.Println("Using test strategy");
-		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 1,1,0,0,0, 0,0,0,0,0, 1};
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 2,1,0,0,0, 0,0,0,0,0, 0};
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Test Strategy";
@@ -125,6 +126,18 @@ func main() {
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Six Eight";
+	} else if *namedStrategy == "SixEightHard" {
+		fmt.Println("Using Six Eight With Hardways");
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,1,1,1,1, 0,0,0,0,0, 0,0,1,1,0, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Six Eight With Hardways";
+	} else if *namedStrategy == "Dark" {
+		fmt.Println("Using Dark Side");
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 2,1,0,0,0, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Dark Side";
 	} else {
 		fmt.Println("Algorithmically building best strategy");
 		for i:=0; i < *numOfChildren; i++ {
@@ -149,7 +162,7 @@ func main() {
 
 			s := strategies[j];
 			fmt.Println(strategies[j].Encode());
-			runStrategy(s, *numOfRolls, *unit_amt, *manual);
+			runStrategy(s, *numOfRolls, *unit_amt, *manual, *triplefield);
 		}
 
 		fmt.Println("");
@@ -163,7 +176,7 @@ func main() {
 	}
 }
 
-func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool) {
+func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool, triplefield bool) {
 	game := lib.NewGame(unit_amt);
 
 	minBalance := s.Amount;
@@ -195,7 +208,7 @@ func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool) {
 		game.Die1 = d1;
 		game.Die2 = d2;
 
-		var payout = game.DeterminePayout(board);
+		var payout = game.DeterminePayout(board, triplefield);
 		s.Amount += payout;
 		
 		if verboseOutput {
