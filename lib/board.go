@@ -68,12 +68,24 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 	if g.Working {
 
 		// place bets
-		b.PlaceFour = s.PlaceFourAmt * g.Unit;
-		b.PlaceFive = s.PlaceFiveAmt * g.Unit;
-		b.PlaceSix = int(float64(s.PlaceSixAmt * g.Unit) * PAYOUT_OFFSET);
-		b.PlaceEight = int(float64(s.PlaceEightAmt * g.Unit) * PAYOUT_OFFSET);
-		b.PlaceNine = s.PlaceNineAmt * g.Unit;
-		b.PlaceTen = s.PlaceTenAmt * g.Unit;
+		if g.Point != 4 {
+			b.PlaceFour = s.PlaceFourAmt * g.Unit;
+		}
+		if g.Point != 5 {
+			b.PlaceFive = s.PlaceFiveAmt * g.Unit;
+		}
+		if g.Point != 6 {
+			b.PlaceSix = int(float64(s.PlaceSixAmt * g.Unit) * PAYOUT_OFFSET);
+		}
+		if g.Point != 8 {
+			b.PlaceEight = int(float64(s.PlaceEightAmt * g.Unit) * PAYOUT_OFFSET);
+		}
+		if g.Point != 9 {
+			b.PlaceNine = s.PlaceNineAmt * g.Unit;
+		}
+		if g.Point != 10 {
+			b.PlaceTen = s.PlaceTenAmt * g.Unit;
+		}
 
 		// main come bet
 		if s.Come {
@@ -141,7 +153,7 @@ func (b *Board) PlaceBets(s *Strategy, g Game) int {
 	}
 
 	// horn bets
-	if (g.HornOn == 1) {
+	if (g.HornOn) {
 		b.HornTwo = s.HornTwo;
 		b.HornThree = s.HornThree;
 		b.HornEleven = s.HornEleven;

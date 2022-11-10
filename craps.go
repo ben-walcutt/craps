@@ -139,6 +139,12 @@ func main() {
 		strategies[0] = lib.BuildStrategy(testCase);
 		strategies[0].Amount = STARTING_AMT;
 		strategies[0].Name = "Dark Side";
+	} else if *namedStrategy == "DarkPlace" {
+		fmt.Println("Using Dark Side With Place Bets");
+		testCase := [NUM_OF_PARAMS]int {0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0, 0,1,1,1,1, 0,0,0,0,0, 2,1,0,0,0, 0,0,0,0,0, 0};
+		strategies[0] = lib.BuildStrategy(testCase);
+		strategies[0].Amount = STARTING_AMT;
+		strategies[0].Name = "Dark Side";
 	} else {
 		fmt.Println("Algorithmically building best strategy");
 		for i:=0; i < *numOfChildren; i++ {

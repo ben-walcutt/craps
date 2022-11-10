@@ -18,12 +18,24 @@ type Game struct {
 	Working bool
 	Unit int
 
-	HornOn int
+	HornOn bool
 
 	Point int
 
 	Die1 int
 	Die2 int
+
+	Two bool
+	Three bool
+	Four bool
+	Five bool
+	Six bool
+
+	Eight bool
+	Nine bool
+	Ten bool
+	Eleven bool
+	Twelve bool
 }
 
 func NewGame (unit int) Game {
@@ -479,41 +491,90 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 				fmt.Println("\npoint set at 10");
 			}
 		}
-
-		switch diceTotal {
-		case 2:
-			if verboseOutput {
-				fmt.Println("\ncraps aces");
-			}
-		case 3:
-			if verboseOutput {
-				fmt.Println("\ncraps ace deuce");
-			}
-		case 5:
-			if verboseOutput {
-				fmt.Println("\nfever five");
-			}
-		case 9:
-			if verboseOutput {
-				fmt.Println("\ncenter field");
-			}
-		case 11:
-			if verboseOutput {
-				fmt.Println("\nyo leven");
-			}
-		case 12:
-			if verboseOutput {
-				fmt.Println("\ncraps boxcars midnight");
-			}
-		}
 	}
 
 	// playing see a horn, bet a horn because playing a horn constantly is dumb
-	if (diceTotal == 2 || diceTotal == 3 || diceTotal == 11 || diceTotal == 12) {
-		g.HornOn = 1;
-	} else {
-		g.HornOn = 0;
+	// setting up ATS
+	switch diceTotal {
+	case 2:
+		if verboseOutput {
+			fmt.Println("\ncraps aces");
+		}
+		g.HornOn = true;
+		g.Two = true;
+	case 3:
+		if verboseOutput {
+			fmt.Println("\ncraps ace deuce");
+		}
+		g.HornOn = true;
+		g.Three = true;
+	case 4:
+		g.HornOn = false;
+		g.Four = true;
+	case 5:
+		if verboseOutput {
+			fmt.Println("\nfever five");
+		}
+		g.HornOn = false;
+		g.Five = true;
+	case 6:
+		g.HornOn = false;
+		g.Six = true;
+	case 7:
+		g.HornOn = false;
+		g.Two = false;
+		g.Three = false;
+		g.Four = false;
+		g.Five = false;
+		g.Six = false;
+		g.Eight = false;
+		g.Nine = false;
+		g.Ten = false;
+		g.Eleven = false;
+		g.Twelve = false;
+	case 8:
+		g.HornOn = false;
+		g.Eight = true;
+	case 9:
+		if verboseOutput {
+			fmt.Println("\ncenter field");
+		}
+		g.HornOn = false;
+		g.Nine = true;
+	case 10:
+		g.HornOn = false;
+		g.Ten = true;
+	case 11:
+		if verboseOutput {
+			fmt.Println("\nyo leven");
+		}
+		g.HornOn = true;
+		g.Eleven = true;
+	case 12:
+		if verboseOutput {
+			fmt.Println("\ncraps boxcars midnight");
+		}
+		g.HornOn = true;
+		g.Twelve = true;
 	}
+
+	if (g.Two && g.Three && g.Four && g.Five && g.Six) {
+		if verboseOutput {
+			fmt.Println("\nsmall hit");
+		}
+	}
+	if (g.Eight && g.Nine && g.Ten && g.Eleven && g.Twelve) {
+		if verboseOutput {
+			fmt.Println("\ntall hit");
+		}
+	}
+
+	if (g.Two && g.Three && g.Four && g.Five && g.Six && g.Eight && g.Nine && g.Ten && g.Eleven && g.Twelve) {
+		if verboseOutput {
+			fmt.Println("\nall hit");
+		}
+	}
+	
 
 	return g;
 }
