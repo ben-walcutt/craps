@@ -50,6 +50,10 @@ Named Strategies available:
   - Pass line with odds
 - SixEight
   - Six and Eight place bets
+- SixEightHard
+  - Six and Eight place bets with Hardways
+- Dark
+  - Don't pass with odds
 
 You can create a strategy for nearly any available bet on a craps table; however, there is not currently a way to turn off bets. Some restrictions are baked in.
 
@@ -73,7 +77,7 @@ You can create a strategy for nearly any available bet on a craps table; however
 - Don't Come odds
   - Up to 6x
 - Field
-  - 2 and 12 are double
+  - 2 and 12 are double (configurable)
 - Hard Ways
 - Horn (will only be placed on the next roll after a horn)
 - C

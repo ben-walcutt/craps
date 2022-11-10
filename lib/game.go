@@ -362,8 +362,7 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			if g.Point == 4 {
 				g = NewGame(g.Unit);
 				if verboseOutput {
-					fmt.Println("");
-					fmt.Println("win 4");
+					fmt.Println("\nwin 4");
 				}
 			} else {
 				g.ComeFour = true;
@@ -375,8 +374,7 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			if g.Point == 5 {
 				g = NewGame(g.Unit);
 				if verboseOutput {
-					fmt.Println("");
-					fmt.Println("win 5");
+					fmt.Println("\nwin 5");
 				}
 			} else {
 				g.ComeFive = true;
@@ -388,8 +386,7 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			if g.Point == 6 {
 				g = NewGame(g.Unit);
 				if verboseOutput {
-					fmt.Println("");
-					fmt.Println("win 6");
+					fmt.Println("\nwin 6");
 				}
 			} else {
 				g.ComeSix = true;
@@ -400,15 +397,13 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 		case 7:
 			g = NewGame(g.Unit);
 			if verboseOutput {
-				fmt.Println("");
-				fmt.Println("seven out");
+				fmt.Println("\nseven out");
 			}
 		case 8:
 			if g.Point == 8 {
 				g = NewGame(g.Unit);
 				if verboseOutput {
-					fmt.Println("");
-					fmt.Println("win 8");
+					fmt.Println("\nwin 8");
 				}
 			} else {
 				g.ComeEight = true;
@@ -420,8 +415,7 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			if g.Point == 9 {
 				g = NewGame(g.Unit);
 				if verboseOutput {
-					fmt.Println("");
-					fmt.Println("win 9");
+					fmt.Println("\nwin 9");
 				}
 			} else {
 				g.ComeNine = true;
@@ -433,8 +427,7 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			if g.Point == 10 {
 				g = NewGame(g.Unit);
 				if verboseOutput {
-					fmt.Println("");
-					fmt.Println("win 10");
+					fmt.Println("\nwin 10");
 				}
 			} else {
 				g.ComeTen = true;
@@ -449,43 +442,68 @@ func (g Game) UpdateGame(s Strategy, verboseOutput bool) Game {
 			g.Point = 4;
 			g.Working = true;
 			if verboseOutput {
-				fmt.Println("");
-				fmt.Println("point set at 4");
+				fmt.Println("\npoint set at 4");
 			}
 		case 5:
 			g.Point = 5;
 			g.Working = true;
 			if verboseOutput {
-				fmt.Println("");
-				fmt.Println("point set at 5");
+				fmt.Println("\npoint set at 5");
 			}
 		case 6:
 			g.Point = 6;
 			g.Working = true;
 			if verboseOutput {
-				fmt.Println("");
-				fmt.Println("point set at 6");
+				fmt.Println("\npoint set at 6");
+			}
+		case 7:
+			if verboseOutput {
+				fmt.Println("\nfront line winner");
 			}
 		case 8:
 			g.Point = 8;
 			g.Working = true;
 			if verboseOutput {
-				fmt.Println("");
-				fmt.Println("point set at 8");
+				fmt.Println("\npoint set at 8");
 			}
 		case 9:
 			g.Point = 9;
 			g.Working = true;
 			if verboseOutput {
-				fmt.Println("");
-				fmt.Println("point set at 9");
+				fmt.Println("\npoint set at 9");
 			}
 		case 10:
 			g.Point = 10;
 			g.Working = true;
 			if verboseOutput {
-				fmt.Println("");
-				fmt.Println("point set at 10");
+				fmt.Println("\npoint set at 10");
+			}
+		}
+
+		switch diceTotal {
+		case 2:
+			if verboseOutput {
+				fmt.Println("\ncraps aces");
+			}
+		case 3:
+			if verboseOutput {
+				fmt.Println("\ncraps ace deuce");
+			}
+		case 5:
+			if verboseOutput {
+				fmt.Println("\nfever five");
+			}
+		case 9:
+			if verboseOutput {
+				fmt.Println("\ncenter field");
+			}
+		case 11:
+			if verboseOutput {
+				fmt.Println("\nyo leven");
+			}
+		case 12:
+			if verboseOutput {
+				fmt.Println("\ncraps boxcars midnight");
 			}
 		}
 	}

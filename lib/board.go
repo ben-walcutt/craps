@@ -1,7 +1,5 @@
 package lib
 
-// import "fmt"
-
 const PAYOUT_OFFSET = 1.2;
 const SIX_EIGHT_MAX_ODDS = 3;
 const FIVE_NINE_MAX_ODDS = 4;

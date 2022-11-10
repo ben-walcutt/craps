@@ -7,6 +7,7 @@ import (
 	"time"
 	"strings"
 	"strconv"
+	"math"
 )
 
 var verboseOutput bool = false;
@@ -165,8 +166,7 @@ func main() {
 			runStrategy(s, *numOfRolls, *unit_amt, *manual, *triplefield);
 		}
 
-		fmt.Println("");
-		fmt.Println("Results: ");
+		fmt.Println("\nResults: ");
 
 		for j:=0; j < *numOfChildren; j++ {
 			fmt.Println(strategies[j].Encode());
@@ -177,12 +177,15 @@ func main() {
 }
 
 func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool, triplefield bool) {
+	histogram := lib.Histogram{};
 	game := lib.NewGame(unit_amt);
 
 	minBalance := s.Amount;
 	maxBalance := s.Amount;
 
-	for i:=0; i < numOfRolls; i++ {
+	i := 0;
+
+	for ; i < numOfRolls; i++ {
 		board := lib.Board{};
 		wager := board.PlaceBets(s, game);
 
@@ -191,16 +194,33 @@ func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool, tri
 			break;
 		}
 
+		if verboseOutput {
+			fmt.Println("");
+			fmt.Println("working?			", game.Working);
+			if game.Working {
+				fmt.Println("point: 				", game.Point);
+			}
+			fmt.Println("wager: 				", wager);
+		}
+
 		var d1 int;
 		var d2 int;
 
 		if manual {
-			fmt.Println("\nRoll: ");
-			var input string;
-			fmt.Scanln(&input);
-			dice := strings.Split(input, ",");
-			d1, _ = strconv.Atoi(dice[0]);
-			d2, _ = strconv.Atoi(dice[1]);
+			for {
+				fmt.Println("\nRoll: ");
+				var input string;
+				fmt.Scanln(&input);
+				dice := strings.Split(input, ",");
+				d1, _ = strconv.Atoi(dice[0]);
+				d2, _ = strconv.Atoi(dice[1]);
+
+				if d1 > 6 || d2 > 6 {
+					fmt.Println("bad input");
+				} else {
+					break;
+				}
+			}
 		} else {
 			d1, d2 = game.Roll();
 		}
@@ -208,17 +228,39 @@ func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool, tri
 		game.Die1 = d1;
 		game.Die2 = d2;
 
+		diceTotal := d1 + d2;
+		switch diceTotal {
+		case 2:
+			histogram.Two++;
+		case 3:
+			histogram.Three++;
+		case 4:
+			histogram.Four++;
+		case 5:
+			histogram.Five++;
+		case 6:
+			histogram.Six++;
+		case 7:
+			histogram.Seven++;
+		case 8:
+			histogram.Eight++;
+		case 9:
+			histogram.Nine++;
+		case 10:
+			histogram.Ten++;
+		case 11:
+			histogram.Eleven++;
+		case 12:
+			histogram.Twelve++;
+		}
+
 		var payout = game.DeterminePayout(board, triplefield);
 		s.Amount += payout;
 		
 		if verboseOutput {
-			fmt.Println("working?			", game.Working);
-			if game.Working {
-				fmt.Println("point: 				", game.Point);
-			}
+			fmt.Println("");
 			fmt.Println("d1:     			", d1);
 			fmt.Println("d2:     			", d2);
-			fmt.Println("wager: 				", wager);
 			fmt.Println("payout: 			", payout);
 			fmt.Println("current balance: 	", s.Amount);
 			fmt.Println("current game: 		", game);
@@ -227,7 +269,7 @@ func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool, tri
 		game = game.UpdateGame(*s, verboseOutput);
 
 		if verboseOutput {
-			fmt.Println("");
+			fmt.Println("------------");
 		}
 
 		if s.Amount < minBalance {
@@ -241,5 +283,18 @@ func runStrategy(s *lib.Strategy, numOfRolls int, unit_amt int, manual bool, tri
 
 	fmt.Println("Strategy minimum balance: ", minBalance);
 	fmt.Println("Strategy maximum balance: ", maxBalance);
+	if verboseOutput {
+		fmt.Println("Two occurance:		", histogram.Two, "->", math.Floor(float64(histogram.Two) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Three occurance:	", histogram.Three, "->", math.Floor(float64(histogram.Three) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Four occurance:		", histogram.Four, "->", math.Floor(float64(histogram.Four) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Five occurance:		", histogram.Five, "->", math.Floor(float64(histogram.Five) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Six occurance:		", histogram.Six, "->", math.Floor(float64(histogram.Six) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Seven occurance:	", histogram.Seven, "->", math.Floor(float64(histogram.Seven) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Eight occurance:	", histogram.Eight, "->", math.Floor(float64(histogram.Eight) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Nine occurance:		", histogram.Nine, "->", math.Floor(float64(histogram.Nine) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Ten occurance:		", histogram.Ten, "->", math.Floor(float64(histogram.Ten) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Eleven occurance:	", histogram.Eleven, "->", math.Floor(float64(histogram.Eleven) / float64(i) * 10000) / 100, "%");
+		fmt.Println("Twelve occurance:	", histogram.Twelve, "->", math.Floor(float64(histogram.Twelve) / float64(i) * 10000) / 100, "%");
+	}
 }
 
